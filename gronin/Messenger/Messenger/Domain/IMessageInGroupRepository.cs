@@ -5,7 +5,7 @@ namespace Messenger.Domain
 {
     public interface IMessageInGroupRepository
     {
-        IReadOnlyList<IMessage> Load(Guid groupId);
-        void Save(IReadOnlyList<IMessage> messages);
+        ICollection<IMessage> Load(Guid groupId);
+        void Save(IReadOnlyList<IMessage> messages, Guid groupId);
     }
 }

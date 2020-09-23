@@ -21,7 +21,7 @@ namespace Messenger.Domain
         public bool IsAdmin { get; }
         public bool IsOwner { get; }
 
-        public virtual User User { get; }
-        public virtual Group Group { get; }
+        public virtual IUser User { get; }
+        public virtual IGroup Group { get; }
     }
 }

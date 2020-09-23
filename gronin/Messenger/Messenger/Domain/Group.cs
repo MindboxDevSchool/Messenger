@@ -1,33 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Messenger.Domain
 {
-    public class Group
+    public class Group : IGroup
     {
-        public Group(IReadOnlyList<IUserInGroup> users,IReadOnlyList<IMessage> messages, string name)
+        public Group(Guid id,ICollection<IUserInGroup> users,ICollection<IMessage> messages)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             UsersInGroup = users;
             Messages = messages;
-            Name = name;
         }
-
-        //private IUsersInGroupRepository _usersInGroupRepository;
+        
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public  IReadOnlyList<IMessage> Messages { get; }
-        public  IReadOnlyList<IUserInGroup> UsersInGroup { get; }
+        public  ICollection<IMessage> Messages { get; }
+        public  ICollection<IUserInGroup> UsersInGroup { get; }
 
-        public IEnumerable<User> GetAdmin()
+        public IEnumerable<IUser> GetAdmin()
         {
             return UsersInGroup.Where(i => i.IsAdmin).Select(i => i.User);
         }
 
-        public User GetOwner()
+        public IUser GetOwner()
         {
             return UsersInGroup.Where(i => i.IsOwner).Select(i => i.User).FirstOrDefault();
+        }
+
+        public virtual void NewMessage(IUserInGroup sender, IMessage newMessage)
+        {
+            Messages.Add(newMessage);
+        }
+
+        public virtual void DeleteMessage(IUserInGroup caller, IMessage messageToDelete)
+        {
+            if (caller.UserId == messageToDelete.SenderId || caller.IsAdmin)
+            {
+                Messages.Remove(messageToDelete);
+            }
+            else
+            {
+                throw new ConstraintException("Only admins and authors can delete messages");
+            }
+        }
+
+        public virtual void UpdateMessage(IUserInGroup caller, IMessage OldMessage, string newText)
+        {
+            if (caller.UserId == OldMessage.SenderId)
+            {
+                Messages.Single(msg => msg == OldMessage).Text = newText;
+            }
+            else
+            {
+                throw new ConstraintException("Only authors can edit messages");
+            }
         }
 
         public int GetMembersCount()

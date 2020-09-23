@@ -6,7 +6,7 @@
         string GroupId { get; }
         bool IsAdmin { get; }
         bool IsOwner { get; }
-        User User { get; }
-        Group Group { get; }
+        IUser User { get; }
+        IGroup Group { get; }
     }
 }
