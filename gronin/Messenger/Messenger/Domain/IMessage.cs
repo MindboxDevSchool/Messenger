@@ -5,8 +5,8 @@ namespace Messenger.Domain
     public interface IMessage
     {
         Guid Id { get;  }
-        string SenderId { get;  }
+        Guid SenderId { get; }
         string Text { get; set; }
-        IUserInGroup Sender { get;  }
+        
     }
 }

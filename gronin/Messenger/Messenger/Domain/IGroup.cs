@@ -5,7 +5,7 @@ namespace Messenger.Domain
 {
     public interface IGroup
     {
-        Guid Id { get; set; }
+        Guid Id { get; }
         string Name { get; set; }
         ICollection<IMessage> Messages { get; }
         ICollection<IUserInGroup> UsersInGroup { get; }

@@ -13,7 +13,7 @@ namespace Messenger.Domain
 
         
         public Guid Id { get; }
-        public Guid Name { get; }
+        public Guid Name { get; set; }
         public virtual ICollection<UserInGroup> UserGroups { get; }
     }
 }

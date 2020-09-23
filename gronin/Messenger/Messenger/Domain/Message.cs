@@ -4,15 +4,14 @@ namespace Messenger.Domain
 {
     public class Message : IMessage
     {
-        public Message(string text)
+        public Message(string text, Guid senderId)
         {
             Id = Guid.NewGuid();
         }
 
         public Guid Id { get;  }
-        public string SenderId { get; }
+        public Guid SenderId { get; }
         public string Text { get; set; }
-
-        public virtual IUserInGroup Sender { get; }
+        
     }
 }

@@ -1,9 +1,11 @@
-﻿namespace Messenger.Domain
+﻿using System;
+
+namespace Messenger.Domain
 {
     public interface IUserInGroup
     {
-        string UserId { get; }
-        string GroupId { get; }
+        Guid UserId { get; }
+        Guid GroupId { get; }
         bool IsAdmin { get; }
         bool IsOwner { get; }
         IUser User { get; }

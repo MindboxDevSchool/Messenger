@@ -6,18 +6,18 @@ namespace Messenger.Domain
 {
     public class UserInGroup : IUserInGroup
     {
-        public UserInGroup(string userId, string groupId, bool isAdmin, bool isOwner, User user, Group @group)
+        public UserInGroup(Guid userId, Guid groupId, bool isAdmin, bool isOwner, IUser user, IGroup @group)
         {
-            UserId = userId ?? throw new ArgumentNullException(nameof(userId));
-            GroupId = groupId ?? throw new ArgumentNullException(nameof(groupId));
+            UserId = userId;
+            GroupId = groupId;
             IsAdmin = isAdmin;
             IsOwner = isOwner;
             User = user ?? throw new ArgumentNullException(nameof(user));
             Group = @group ?? throw new ArgumentNullException(nameof(@group));
         }
 
-        public string UserId { get; }
-        public string GroupId { get; }
+        public Guid UserId { get; }
+        public Guid GroupId { get; }
         public bool IsAdmin { get; }
         public bool IsOwner { get; }
 
