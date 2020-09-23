@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Messenger
+namespace Messenger.Domain
 {
     public class Channel : Chat
     {
@@ -13,7 +13,7 @@ namespace Messenger
         
         public void AddNewMember(User user)
         {
-            _members.Add(user);
+            _memberRepository.CreateUser(user);
         }
 
         protected override bool CanUserSendMessage(User user)

@@ -1,4 +1,6 @@
 ﻿using Messenger;
+using Messenger.Application;
+using Messenger.Infrastructure;
 
 namespace Usage
 {
@@ -6,10 +8,12 @@ namespace Usage
     {
         public static CompositionRoot Create()
         {
+            var chatRepository = new ChatRepository();
+            var userRepository = new UserRepository();
             return new CompositionRoot()
             {
-                ChatService = new Messenger.ChatService(),
-                UserService = new Messenger.UserService()
+                ChatService = new ChatService(chatRepository),
+                UserService = new UserService(userRepository)
             };
         }
 

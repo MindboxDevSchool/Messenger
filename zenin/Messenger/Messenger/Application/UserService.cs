@@ -1,18 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
+using Messenger.Domain;
+using Messenger.Infrastructure;
 
-namespace Messenger
+namespace Messenger.Application
 {
     public class UserService : IUserService
     {
-        private List<User> _users;
-
-        public Guid CreateNewUser(string userName)
+        public UserService(UserRepository userRepository)
         {
-            if (userName == null) throw new ArgumentNullException(nameof(userName));
-            Guid userId = Guid.NewGuid();
-            _users.Add(new User(userName, userId));
-            return userId;
+            _userRepository = userRepository;
         }
+        public User CreateUser(string userName)
+        {
+            User user = new User(userName);
+            _userRepository.CreateUser(user);
+            return user;
+        }
+
+        public void DeleteUser(User user)
+        {
+            _userRepository.DeleteUser(user.Id);
+        }
+
+        private readonly IUserRepository _userRepository;
     }
 }

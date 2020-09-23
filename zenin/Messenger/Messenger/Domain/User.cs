@@ -1,16 +1,16 @@
 ﻿using System;
 
-namespace Messenger
+namespace Messenger.Domain
 {
-    public class User
+    public class User : IUser
     {
         public string Name { get; }
         public Guid Id { get; }
 
-        public User(string name, Guid id)
+        public User(string name)
         {
             Name = name;
-            Id = id;
+            Id = Guid.NewGuid();
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Messenger
+namespace Messenger.Domain
 {
     public class Group : Chat
     {
-        private List<User> _groupSuperUsers;
+        private List<User> _groupSuperUsers = new List<User>();
 
         public Group(User user) : base(user)
         {
@@ -14,7 +14,7 @@ namespace Messenger
         
         public void AddNewMember(User user)
         {
-            _members.Add(user);
+            _memberRepository.CreateUser(user);
         }
         protected override bool CanUserSendMessage(User user)
         {

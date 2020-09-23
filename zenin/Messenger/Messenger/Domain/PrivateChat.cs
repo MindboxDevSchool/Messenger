@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Messenger
+namespace Messenger.Domain
 {
     public class PrivateChat : Chat
     {
         public PrivateChat(User user1, User user2) : base(user1)
         {
-            _members.Add(user2);
+            _memberRepository.CreateUser(user2);
         }
         
         protected override bool CanUserSendMessage(User user)

@@ -1,16 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Messenger
+using Messenger.Domain;
+using Messenger.Infrastructure;
+
+namespace Messenger.Application
 {
     public class ChatService : IChatService
     {
-        private List<Guid> _chats;
-
-        public Guid CreateNewChat(IChat chat)
+        public ChatService(IChatRepository chatRepository)
         {
-            if (chat == null) throw new ArgumentNullException(nameof(chat));
-            _chats.Add(chat.Id);
-            return chat.Id;
+            _chatRepository = chatRepository;
         }
+        public void CreateChat(IChat chat)
+        {
+            _chatRepository.CreateChat(chat);
+        }
+
+        public void DeleteChat(IChat chat)
+        {
+            _chatRepository.DeleteChat(chat.Id);
+        }
+
+        private readonly IChatRepository _chatRepository;
     }
 }

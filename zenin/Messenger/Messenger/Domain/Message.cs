@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace Messenger
+namespace Messenger.Domain
 {
-    public class Message
+    public class Message : IMessage
     {
+        public Guid Id { get; }
         public Guid CreatedBy { get; }
         public DateTime CreatedAt { get; }
         public string Text { get; set; }
@@ -12,6 +13,7 @@ namespace Messenger
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
             if (text == "") throw new ArgumentNullException(nameof(text));
+            Id = Guid.NewGuid();
             CreatedAt = DateTime.Now;
             CreatedBy = user.Id;
             Text = text;

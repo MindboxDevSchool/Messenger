@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Messenger.Domain;
 
-namespace Messenger
+namespace Messenger.Application
 {
     public interface IChatService
     {
-        Guid CreateNewChat(IChat chat);
+        void CreateChat(IChat chat);
+        void DeleteChat(IChat chat);
     }
 }

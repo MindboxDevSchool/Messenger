@@ -1,9 +1,11 @@
 ﻿using System;
+using Messenger.Domain;
 
-namespace Messenger
+namespace Messenger.Application
 {
     public interface IUserService
     {
-        Guid CreateNewUser(string userName);
+        User CreateUser(string userName);
+        void DeleteUser(User user);
     }
 }

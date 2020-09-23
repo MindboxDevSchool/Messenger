@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Immutable;
 
-namespace Messenger
+namespace Messenger.Domain
 {
     public interface IChat
     {
@@ -9,9 +10,9 @@ namespace Messenger
         User CreatedBy { get; }
         DateTime CreatedAt { get; }
 
-        void SendMessage(User user, string text);
+        Guid SendMessage(User user, string text);
+        Message GetMessage(Guid messageId);
         void EditMessage(User user, Message message, string newText);
         void DeleteMessage(User user, Message message);
-
     }
 }
