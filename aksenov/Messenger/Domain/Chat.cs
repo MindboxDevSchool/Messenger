@@ -51,12 +51,7 @@ namespace Messenger.Domain
                 throw new InvalidRoleException(newRole);
             }
 
-            var member = _members.FirstOrDefault(m => m.User.Id == userId);
-
-            if (member == null)
-            {
-                throw new ChatMemberNotFoundException(userId);
-            }
+            var member = GetMemberBy(userId);
 
             if (newRole != member.Role)
             {
@@ -64,7 +59,7 @@ namespace Messenger.Domain
             }
         }
 
-        public void AddMember(IUser user)
+        public ChatMember AddMember(IUser user)
         {
             if (_members.Count == MaxMembers)
             {
@@ -73,6 +68,27 @@ namespace Messenger.Domain
             
             var chatMember = new ChatMember(user, DefaultMemberRole);
             _members.Add(chatMember);
+
+            return chatMember;
+        }
+
+        public void RemoveMember(Guid userId)
+        {
+            var member = GetMemberBy(userId);
+
+            _members.Remove(member);
+        }
+
+        public ChatMember GetMemberBy(Guid userId)
+        {
+            var member = Members.FirstOrDefault(m => m.User.Id == userId);
+            
+            if (member == null)
+            {
+                throw new ChatMemberNotFoundException(userId);
+            }
+
+            return member;
         }
 
         public Chat(Guid id, string name, ChatType type, 

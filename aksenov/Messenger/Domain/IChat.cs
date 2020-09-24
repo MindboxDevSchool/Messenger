@@ -17,7 +17,9 @@ namespace Messenger.Domain
         void PostMessage(Message message);
         void TryUpdateMessage(Message updatedMessage);
         void TryDeleteMessage(Guid messageId);
-        void AddMember(IUser user);
+        ChatMember AddMember(IUser user);
+        ChatMember GetMemberBy(Guid userId);
+        void RemoveMember(Guid userId);
         void TryChangeMemberRole(Guid userId, RoleType newRole);
     }
 }

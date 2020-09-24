@@ -5,6 +5,7 @@
         Write,
         Read,
         Edit,
-        Delete
+        DeleteOwn,
+        DeleteSomeone
     }
 }

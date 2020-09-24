@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Messenger.Domain
 {
@@ -7,6 +8,7 @@ namespace Messenger.Domain
         Guid Id { get; }
         string Name { get; }
         string Phone { get; }
+        Dictionary<Guid, ChatRole> AvailableChats { get; }
         bool HaveAccessTo(Guid chatId, AccessType accessType);
     }
 }

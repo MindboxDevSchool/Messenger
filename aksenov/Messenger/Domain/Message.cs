@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Dynamic;
 
 namespace Messenger.Domain
 {
@@ -12,12 +13,17 @@ namespace Messenger.Domain
 
         public DateTime DepartureDate { get; }
 
-        public Message(Guid id, Guid userId, string content, DateTime departureDate)
+        private Message(Guid id, Guid userId, string content, DateTime departureDate)
         {
             UserId = userId;
             Content = content;
             DepartureDate = departureDate;
             Id = id;
+        }
+
+        public static Message Create(Guid userId, string content, DateTime departureDate)
+        {
+            return new Message(Guid.NewGuid(), userId, content, departureDate);
         }
 
         public void ChangeContent(string newContent)

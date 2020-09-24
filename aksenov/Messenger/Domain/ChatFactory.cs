@@ -1,31 +1,38 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Messenger.Application;
 
 namespace Messenger.Domain
 {
     public class ChatFactory : IChatFactory
     {
-        public ChatFactory(MessengerSettings messengerSettings)
+        public ChatFactory(MessengerSettings messengerSettings, IUserRepository userRepository)
         {
             _messengerSettings = messengerSettings;
+            _userRepository = userRepository;
         }
         
-        public IChat Create(ChatType chatType, string name)
+        public IChat Create(ChatType chatType, string name, Guid creatorId)
         {
             switch (chatType)
             {
-                case ChatType.Channel: return getNewChannelChat(name);
-                case ChatType.Group: return getNewGroupChat(name);
-                case ChatType.Private: return getNewPrivateChat(name);
+                case ChatType.Channel: return getNewChannelChat(name, creatorId);
+                case ChatType.Group: return getNewGroupChat(name, creatorId);
+                case ChatType.Private: return getNewPrivateChat(name, creatorId);
                 default: throw new ChatTypeNotRecognizedException(chatType);
             }
         }
 
-        private Chat getNewChannelChat(string name)
+        private Chat getNewChannelChat(string name, Guid creatorId)
         {
             var messages = new List<Message>();
-            var members = new List<ChatMember>();
+            
+            var creator = _userRepository.GetBy(creatorId);
+            var members = new List<ChatMember>()
+            {
+                new ChatMember(creator, RoleType.Author)
+            };
             
             var defaultRole = RoleType.ChannelParticipant;
                     
@@ -41,10 +48,15 @@ namespace Messenger.Domain
                                 members, availableRoles,maxMembers, defaultRole);
         }
         
-        private Chat getNewGroupChat(string name)
+        private Chat getNewGroupChat(string name, Guid creatorId)
         {
             var messages = new List<Message>();
-            var members = new List<ChatMember>();
+            
+            var creator = _userRepository.GetBy(creatorId);
+            var members = new List<ChatMember>()
+            {
+                new ChatMember(creator, RoleType.Administrator)
+            };
             
             var defaultRole = RoleType.GroupParticipant;
                     
@@ -60,10 +72,15 @@ namespace Messenger.Domain
                 members, availableRoles,maxMembers, defaultRole);
         }
         
-        private Chat getNewPrivateChat(string name)
+        private Chat getNewPrivateChat(string name, Guid creatorId)
         {
             var messages = new List<Message>();
-            var members = new List<ChatMember>();
+            
+            var creator = _userRepository.GetBy(creatorId);
+            var members = new List<ChatMember>()
+            {
+                new ChatMember(creator, RoleType.PrivateParticipant)
+            };
             
             var defaultRole = RoleType.PrivateParticipant;
                     
@@ -79,5 +96,6 @@ namespace Messenger.Domain
         }
         
         private MessengerSettings _messengerSettings;
+        private IUserRepository _userRepository;
     }
 }

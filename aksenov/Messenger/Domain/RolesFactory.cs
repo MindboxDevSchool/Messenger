@@ -11,7 +11,12 @@ namespace Messenger.Domain
 
         public ChatRole Create(RoleType roleType)
         {
-            return new ChatRole(_messengerSettings.Accesses[roleType]);
+            if (!_messengerSettings.Accesses.TryGetValue(roleType, out var accesses))
+            {
+                throw new RoleTypeSettingsNotFoundException(roleType);
+            }
+
+            return new ChatRole(accesses);
         }
 
         private MessengerSettings _messengerSettings;

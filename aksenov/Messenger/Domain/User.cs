@@ -10,24 +10,24 @@ namespace Messenger.Domain
 
         public string Phone { get; }
 
+        public Dictionary<Guid, ChatRole> AvailableChats { get; }
+
         public User(Guid id, string name, string phone, Dictionary<Guid, ChatRole> availableChats)
         {
             Id = id;
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Phone = phone ?? throw new ArgumentNullException(nameof(phone));
-            _availableChats = availableChats;
+            AvailableChats = availableChats;
         }
 
         public bool HaveAccessTo(Guid chatId, AccessType accessType)
         {
-            if (!_availableChats.TryGetValue(chatId, out var chatRole))
+            if (!AvailableChats.TryGetValue(chatId, out var chatRole))
             {
                 throw new ChatNotFoundException(chatId);
             }
             
             return chatRole.GetAccessFor(accessType);
         }
-
-        private Dictionary<Guid, ChatRole> _availableChats;
     }
 }
