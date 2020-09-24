@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Messenger.Domain
+namespace Messenger.Exceptions
 {
     public class ChatNotFoundException: Exception
     {

@@ -1,6 +1,7 @@
 ﻿using System;
+using Messenger.Domain;
 
-namespace Messenger.Domain
+namespace Messenger.Exceptions
 {
     public class InvalidRoleException : Exception
     {

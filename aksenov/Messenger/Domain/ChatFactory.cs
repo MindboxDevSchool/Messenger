@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Messenger.Application;
+using Messenger.Exceptions;
 
 namespace Messenger.Domain
 {
