@@ -29,7 +29,7 @@ namespace Messenger.Application
         public IEnumerable<Message> RequestNewMessages(Guid chatId, Guid userId)
         {
             var user = _userRepository.GetBy(userId);
-            if (user.AvailableChats.Contains<>(chatId))
+            if (user.AvailableChats.ContainsKey(chatId))
             {
                 var newMessages = _chatRepository.LoadNewFor(chatId);
                 return newMessages;
