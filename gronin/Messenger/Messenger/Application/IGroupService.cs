@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Messenger.Domain;
 
 namespace Messenger.Application
 {
     public interface IGroupService
     {
-        void SendMessage(IMessage newMessage);
-        void DeleteMessage(IMessage message);
-        void UpdateMessage(IMessage oldMessage, string newText);
-        
-        ICollection<IUserInGroup> Users { get; }
-        ICollection<IMessage> Messages { get; }
-        
-        ICollection<IMessage> GetMessagesToShow(int amount);
+        void CreateChat(string name, IUser user);
+        void CreatePrivateChat(string name, IUser user,IUser user2);
+        void CreateChannel(string name, IUser user);
+        void DeleteGroup(Guid chatId);
+        IGroup GetGroup(Guid chatId);
     }
 }

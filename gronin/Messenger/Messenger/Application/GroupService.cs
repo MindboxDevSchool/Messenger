@@ -7,43 +7,46 @@ namespace Messenger.Application
 {
     public class GroupService:IGroupService
     {
-        private readonly IUsersInGroupRepository _usersInGroupRepository;
+        private readonly IGroupRepository _groupRepository;
+        private readonly IUsersRepository _usersRepository;
         private readonly IMessageInGroupRepository _messageInGroupRepository;
-        private readonly IGroup _group;
 
-        public GroupService(IUsersInGroupRepository usersInGroupRepository,
-                            IMessageInGroupRepository messageInGroupRepository,
-                            Guid groupId)
+        public GroupService(IGroupRepository groupRepository, IUsersRepository usersRepository,
+            IMessageInGroupRepository messageInGroupRepository)
         {
-            _usersInGroupRepository = usersInGroupRepository;
-            _messageInGroupRepository = messageInGroupRepository;
-            
-            var users = _usersInGroupRepository.LoadByGroup(groupId);
-            var messages = _messageInGroupRepository.Load(groupId);
-            
-            _group = new Group(groupId,users,messages);
+            _groupRepository = groupRepository ?? throw new ArgumentNullException(nameof(groupRepository));
+            _usersRepository = usersRepository ?? throw new ArgumentNullException(nameof(usersRepository));
+            _messageInGroupRepository = messageInGroupRepository ??
+                                        throw new ArgumentNullException(nameof(messageInGroupRepository));
         }
 
-        public void SendMessage(IMessage newMessage)
+        public void CreateChat(string name, IUser user)
         {
-            throw new System.NotImplementedException();
+            var id = Guid.NewGuid();
+            var chat = new Chat(user,_messageInGroupRepository,_usersRepository,id);
         }
 
-        public void DeleteMessage(IMessage message)
+        public void CreatePrivateChat(string name, IUser user1,IUser user2)
         {
-            throw new System.NotImplementedException();
+            var id = Guid.NewGuid();
+            var chat = new PrivateChat(user1, user2, _messageInGroupRepository, _usersRepository,id);
         }
 
-        public void UpdateMessage(IMessage oldMessage, string newText)
+        public void CreateChannel(string name, IUser user)
         {
-            throw new System.NotImplementedException();
+            var id = Guid.NewGuid();
+            var chat = new GroupChannel(user,_messageInGroupRepository,_usersRepository,id);
         }
 
-        public ICollection<IUserInGroup> Users { get; }
-        public ICollection<IMessage> Messages { get; }
-        public ICollection<IMessage> GetMessagesToShow(int amount)
+        public void DeleteGroup(Guid id)
         {
-            throw new System.NotImplementedException();
+            _groupRepository.DeleteGroup(id);
+        }
+
+        public IGroup GetGroup(Guid chatId)
+        {
+            return _groupRepository.GetGroup(chatId);
         }
     }
+    
 }

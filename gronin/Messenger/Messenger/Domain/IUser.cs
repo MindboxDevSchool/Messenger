@@ -6,7 +6,6 @@ namespace Messenger.Domain
     public interface IUser
     {
         Guid Id { get; }
-        Guid Name { get; set; }
-        ICollection<UserInGroup> UserGroups { get; }
+        string Name { get; set; }
     }
 }

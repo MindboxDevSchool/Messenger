@@ -6,6 +6,8 @@ namespace Messenger.Application
 {
     public interface IUserService
     {
-        ICollection<IGroup> GroupsOfUser { get; }
+        IUser CreateUser(string userName);
+        void DeleteUser(User user);
+        IUser GetUser(Guid userId);
     }
 }

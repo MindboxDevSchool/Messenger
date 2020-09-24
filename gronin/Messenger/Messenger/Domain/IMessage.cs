@@ -7,6 +7,6 @@ namespace Messenger.Domain
         Guid Id { get;  }
         Guid SenderId { get; }
         string Text { get; set; }
-        
+        Guid GroupId { get; }
     }
 }

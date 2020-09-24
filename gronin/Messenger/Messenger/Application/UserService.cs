@@ -5,21 +5,29 @@ using Messenger.Domain;
 
 namespace Messenger.Application
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
-        private UserInGroupRepository _userInGroupRepository;
-        
-        public ICollection<IGroup> GroupsOfUser { get; }
-
-        public UserService(Guid userId)
+        public UserService(UserRepository userRepository)
         {
-            GroupsOfUser = _userInGroupRepository.LoadByUser(userId).Select(i=> i.Group).ToList();
+            _usersRepository = userRepository;
+        }
+        public IUser CreateUser(string userName)
+        {
+            User user = new User{Name = userName};
+            _usersRepository.CreateUser(user);
+            return user;
         }
 
-        public void SendMessage(IGroup group, string text)
+        public void DeleteUser(User user)
         {
-            var message = new Message(text,);
-            group.NewMessage();
+            _usersRepository.DeleteUser(user.Id);
         }
+
+        public IUser GetUser(Guid userId)
+        {
+            return _usersRepository.GetUser(userId);
+        }
+
+        private readonly IUsersRepository _usersRepository;
     }
 }

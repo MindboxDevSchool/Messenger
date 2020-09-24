@@ -6,16 +6,12 @@ namespace Messenger.Domain
     public interface IGroup
     {
         Guid Id { get; }
-        string Name { get; set; }
-        ICollection<IMessage> Messages { get; }
-        ICollection<IUserInGroup> UsersInGroup { get; }
-        IEnumerable<IUser> GetAdmin();
-        IUser GetOwner();
-
-        void NewMessage(IUserInGroup sender,IMessage newMessage);
-
-        void DeleteMessage(IUserInGroup caller, IMessage messageToDelete);
+        string Name { get; }
+        IUser CreatedBy { get; }
         
-        void UpdateMessage(IUserInGroup author, IMessage OldMessage, string newText);
+        Guid SendMessage(IUser sender, string text);
+        IMessage GetMessage(Guid messageId);
+        void EditMessage(IUser caller, IMessage message, string newText);
+        void DeleteMessage(IUser caller, IMessage message);
     }
 }

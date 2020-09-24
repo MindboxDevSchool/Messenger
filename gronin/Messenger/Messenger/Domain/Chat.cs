@@ -5,34 +5,40 @@ using System.Linq;
 
 namespace Messenger.Domain
 {
-    public class GroupChannel:Group,IGroup
+    public class Chat : Group
     {
-        private readonly IUser _author;
-        public GroupChannel(IUser creator, 
-                            IMessageInGroupRepository messages,
-                            IUsersRepository users,Guid id) : base(creator, messages, users,id)
+        private List<IUser> _groupAdmins = new List<IUser>();
+
+        public Chat(IUser creator,
+                     IMessageInGroupRepository messages,
+                     IUsersRepository users,Guid id) 
+                     : base(creator, messages, users,id)
         {
-            _author = creator;
+            _groupAdmins.Add(creator);
         }
         
         public void AddNewMember(User user)
         {
             _memberRepository.CreateUser(user);
         }
-
+        
+        public void AddAdmin(User user)
+        {
+            _groupAdmins.Add(user);
+        }
         protected override bool CanUserSendMessage(IUser user)
         {
-            return user.Id == _author.Id;
+            return true;
         }
 
         protected override bool CanUserEditMessage(IUser user, IMessage message)
         {
-            return user.Id == _author.Id;
+            return message.SenderId == user.Id;
         }
 
         protected override bool CanUserDeleteMessage(IUser user, IMessage message)
         {
-            return user.Id == _author.Id;
+            return _groupAdmins.Contains(user);
         }
     }
 }

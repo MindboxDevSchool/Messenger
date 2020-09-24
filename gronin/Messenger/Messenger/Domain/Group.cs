@@ -1,66 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace Messenger.Domain
 {
-    public class Group : IGroup
-    {
-        public Group(Guid id,ICollection<IUserInGroup> users,ICollection<IMessage> messages)
+    
+        public abstract class Group : IGroup
         {
-            Id = id;
-            UsersInGroup = users;
-            Messages = messages;
-        }
+            public Guid Id { get; }
+            public string Name { get; set; }
+            public IUser CreatedBy { get; protected set; }
+            protected readonly IMessageInGroupRepository _messageRepository;
+            protected readonly IUsersRepository _memberRepository;
+
+            public Group(IUser creator,IMessageInGroupRepository messages,IUsersRepository users,Guid id)
+            {
+                Id = id;
+                CreatedBy = creator;
+                _messageRepository = messages;
+                _memberRepository = users;
+                _memberRepository.CreateUser(creator);
+            }
+            public void AddNewMember(User user)
+            {
+                _memberRepository.CreateUser(user);
+            }
+            protected abstract bool CanUserSendMessage(IUser user);
+            protected abstract bool CanUserEditMessage(IUser user, IMessage message);
+            protected abstract bool CanUserDeleteMessage(IUser user, IMessage message);
         
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public  ICollection<IMessage> Messages { get; }
-        public  ICollection<IUserInGroup> UsersInGroup { get; }
-
-        public IEnumerable<IUser> GetAdmin()
-        {
-            return UsersInGroup.Where(i => i.IsAdmin).Select(i => i.User);
-        }
-
-        public IUser GetOwner()
-        {
-            return UsersInGroup.Where(i => i.IsOwner).Select(i => i.User).FirstOrDefault();
-        }
-
-        public virtual void NewMessage(IUserInGroup sender, IMessage newMessage)
-        {
-            Messages.Add(newMessage);
-        }
-
-        public virtual void DeleteMessage(IUserInGroup caller, IMessage messageToDelete)
-        {
-            if (caller.UserId == messageToDelete.SenderId || caller.IsAdmin)
+            public Guid SendMessage(IUser user, string text)
             {
-                Messages.Remove(messageToDelete);
+                Message newMessage = new Message(text, user.Id,Id);
+                if (CanUserSendMessage(user) && _memberRepository.GetUser(user.Id) != null)
+                    _messageRepository.CreateMessage(newMessage);
+                return newMessage.Id;
             }
-            else
+
+            public IMessage GetMessage(Guid messageId)
             {
-                throw new ConstraintException("Only admins and authors can delete messages");
+                return _messageRepository.GetMessage(messageId);
+            }
+
+            public void EditMessage(IUser user, IMessage message, string newText)
+            {
+                if (CanUserEditMessage(user, message) && _memberRepository.GetUser(user.Id) != null)
+                {
+                    message.Text = newText;
+                    _messageRepository.UpdateMessage(message.Id, message);
+                }
+            }
+        
+            public void DeleteMessage(IUser user, IMessage message)
+            {
+                if (CanUserDeleteMessage(user, message) && _memberRepository.GetUser(user.Id) != null)
+                    _messageRepository.DeleteMessage(message.Id);
             }
         }
-
-        public virtual void UpdateMessage(IUserInGroup caller, IMessage OldMessage, string newText)
-        {
-            if (caller.UserId == OldMessage.SenderId)
-            {
-                Messages.Single(msg => msg == OldMessage).Text = newText;
-            }
-            else
-            {
-                throw new ConstraintException("Only authors can edit messages");
-            }
-        }
-
-        public int GetMembersCount()
-        {
-            return UsersInGroup.Select(i => i.User).Count();
-        } 
-    }
+    
 }

@@ -6,14 +6,28 @@ namespace Messenger
 {
     public class MessageInGroupRepository:IMessageInGroupRepository
     {
-        public ICollection<IMessage> Load(Guid groupId)
+        public void CreateMessage(IMessage message)
         {
-            throw new NotImplementedException();
+            _messageDictionary[message.Id] = message;
         }
 
-        public void Save(IReadOnlyList<IMessage> messages, Guid groupId)
+        public IMessage GetMessage(Guid messageId)
         {
-            throw new NotImplementedException();
+            if(_messageDictionary.ContainsKey(messageId))
+                return _messageDictionary[messageId];
+            return null;
         }
+
+        public void UpdateMessage(Guid messageId, IMessage newMessage)
+        {
+            _messageDictionary[messageId] = newMessage;
+        }
+
+        public void DeleteMessage(Guid messageId)
+        {
+            _messageDictionary.Remove(messageId);
+        }
+        
+        private readonly Dictionary<Guid, IMessage> _messageDictionary = new Dictionary<Guid, IMessage>();
     }
 }
