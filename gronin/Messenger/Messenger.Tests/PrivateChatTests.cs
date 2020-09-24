@@ -1,4 +1,5 @@
-﻿using Messenger.Domain;
+﻿using System;
+using Messenger.Domain;
 using NUnit.Framework;
 
 namespace Messenger.Tests
@@ -30,10 +31,7 @@ namespace Messenger.Tests
             var messages = new MessageInGroupRepository();
             var privateChat = new PrivateChat(user1,user2,messages,users);
             
-            var messageId = privateChat.SendMessage(user3, "Hello, Guys!");
-            var message = privateChat.GetMessage(messageId);
-            
-            Assert.AreEqual(null, message);
+            Assert.Catch<ArgumentException>(()=>privateChat.SendMessage(user3, "Hello, Guys!"));
         }
         
         [Test]

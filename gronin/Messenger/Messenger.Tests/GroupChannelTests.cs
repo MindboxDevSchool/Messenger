@@ -1,4 +1,5 @@
-﻿using Messenger.Domain;
+﻿using System;
+using Messenger.Domain;
 using NUnit.Framework;
 namespace Messenger.Tests
 {
@@ -27,10 +28,7 @@ namespace Messenger.Tests
             var messages = new MessageInGroupRepository();
             var channel = new GroupChannel(author,messages,users);
             
-            var messageId = channel.SendMessage(user2, "Hello!");
-            var message = channel.GetMessage(messageId);
-            
-            Assert.AreEqual(null, message);
+            Assert.Catch<ArgumentException>(()=>channel.SendMessage(user2, "Hello!"));
         }
         
         [Test]
@@ -41,11 +39,8 @@ namespace Messenger.Tests
             var users = new UserRepository();
             var messages = new MessageInGroupRepository();
             var channel = new GroupChannel(author,messages,users);
-            
-            var messageId = channel.SendMessage(user2, "Hello, Guys!");
-            var message = channel.GetMessage(messageId);
-            
-            Assert.AreEqual(null, message);
+
+            Assert.Catch<ArgumentException>(()=>channel.SendMessage(user2, "Hello!"));
         }
         
         [Test]

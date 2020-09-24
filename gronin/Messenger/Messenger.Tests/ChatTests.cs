@@ -1,3 +1,4 @@
+using System;
 using Messenger.Domain;
 using NUnit.Framework;
 
@@ -27,11 +28,8 @@ namespace Messenger.Tests
             var users = new UserRepository();
             var messages = new MessageInGroupRepository();
             var group = new Chat(admin,messages,users);
-            
-            var messageId = group.SendMessage(user2, "Hello, Guys!");
-            var message = group.GetMessage(messageId);
-            
-            Assert.IsNull(message);
+
+            Assert.Catch<ArgumentException>(()=>group.SendMessage(user2, "Hello, Guys!"));
         }
         
         [Test]

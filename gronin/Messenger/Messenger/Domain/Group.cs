@@ -30,8 +30,11 @@ namespace Messenger.Domain
             public Guid SendMessage(IUser user, string text)
             {
                 Message newMessage = new Message(text, user.Id,Id);
-                if (CanUserSendMessage(user) && _memberRepository.GetUser(user.Id) != null)
-                    _messageRepository.CreateMessage(newMessage);
+                if (!(CanUserSendMessage(user) && _memberRepository.GetUser(user.Id) != null))
+                {
+                    throw new ArgumentException("Can't send message");
+                }
+                _messageRepository.CreateMessage(newMessage);
                 return newMessage.Id;
             }
 
