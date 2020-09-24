@@ -13,11 +13,7 @@ namespace Messenger.Tests
         public void Create_NewChannel_ReturnChatWithCorrectCreatorRole()
         {
             // arrange
-            var settings = new MessengerSettings(new Dictionary<RoleType, Dictionary<AccessType, bool>>(),
-                new Dictionary<ChatType, int>()
-                {
-                    {ChatType.Channel, 10}
-                });
+            var settings = MessengerSettings.Default();
             var userRepository = new UserRepository();
             var chatFactory = new ChatFactory(settings, userRepository);
 

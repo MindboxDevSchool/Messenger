@@ -6,10 +6,10 @@ namespace Messenger.Application
 {
     public class UserService : IUserService
     {
-        public UserService(IUserRepository userRepository, IRolesFactory rolesFactory)
+        public UserService(IUserRepository userRepository, MessengerSettings messengerSettings)
         {
             _userRepository = userRepository;
-            _rolesFactory = rolesFactory;
+            _messengerSettings = messengerSettings;
         }
 
         public void CreateNewUser(string name, string phone)
@@ -28,7 +28,7 @@ namespace Messenger.Application
         {
             var user = _userRepository.GetBy(userId);
             var availableChats = user.AvailableChats;
-            var chatRole = _rolesFactory.Create(roleType);
+            var chatRole = _messengerSettings.ChatRoles[roleType];
             availableChats.Add(chatId, chatRole);
             _userRepository.Update(user);
         }
@@ -37,7 +37,7 @@ namespace Messenger.Application
         {
             var user = _userRepository.GetBy(userId);
             var availableChats = user.AvailableChats;
-            var chatRole = _rolesFactory.Create(roleType);
+            var chatRole = _messengerSettings.ChatRoles[roleType];
             availableChats[chatId] = chatRole;
             _userRepository.Update(user);
         }
@@ -57,6 +57,6 @@ namespace Messenger.Application
         }
 
         private readonly IUserRepository _userRepository;
-        private readonly IRolesFactory _rolesFactory;
+        private readonly MessengerSettings _messengerSettings;
     }
 }
