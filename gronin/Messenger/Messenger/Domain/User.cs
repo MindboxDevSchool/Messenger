@@ -5,12 +5,15 @@ namespace Messenger.Domain
 {
     public class User : IUser
     {
-        public User()
+        public User(UserData data)
         {
             Id = Guid.NewGuid();
+            Data = data;
         }
         public Guid Id { get; }
-        public string Name { get; set; }
-        
+
+        public UserData Data { get; set; }
+
+
     }
 }

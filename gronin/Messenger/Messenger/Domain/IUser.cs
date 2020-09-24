@@ -6,6 +6,6 @@ namespace Messenger.Domain
     public interface IUser
     {
         Guid Id { get; }
-        string Name { get; set; }
+        public UserData Data { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace Messenger.Application
 {
     public interface IUserService
     {
-        IUser CreateUser(string userName);
+        IUser CreateUser(UserData userData );
         void DeleteUser(User user);
         IUser GetUser(Guid userId);
     }
