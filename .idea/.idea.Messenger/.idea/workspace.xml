@@ -4,7 +4,11 @@
     <projectFile>Usage/Usage.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b49e5c-dfdc-4971-a7e2-eb878183fac9" name="Default Changelist" comment="" />
+    <list default="true" id="82b49e5c-dfdc-4971-a7e2-eb878183fac9" name="Default Changelist" comment="project added">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Messenger/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Messenger/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/IMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/IMessage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/Message.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/Message.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,8 +21,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Messenger/Domain/IUser.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/IMessage.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/Message.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/User.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/IUserRepository.cs" />
         <option value="$PROJECT_DIR$/Messenger/Usage.cs" />
@@ -35,6 +37,8 @@
         <option value="$PROJECT_DIR$/Messenger/Domain/Group.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" />
         <option value="$PROJECT_DIR$/MessengerUnitTests/Tests.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/IMessage.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/Message.cs" />
       </list>
     </option>
   </component>
@@ -76,8 +80,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600951726642</updated>
-      <workItem from="1600951735600" duration="9651000" />
+      <workItem from="1600951735600" duration="10265000" />
     </task>
+    <task id="LOCAL-00001" summary="project added">
+      <created>1600963343062</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600963343062</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,11 +99,29 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="project added" />
+    <option name="LAST_COMMIT_MESSAGE" value="project added" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="518" y="238" key="Github.ShareDialog" timestamp="1600963422177">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="518" y="238" key="Github.ShareDialog/0.0.1280.680@0.0.1280.680" timestamp="1600963422177" />
     <state x="233" y="73" key="Rider.ProjectTemplateDialog.Size" timestamp="1600962662724">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="73" key="Rider.ProjectTemplateDialog.Size/0.0.1280.680@0.0.1280.680" timestamp="1600962662724" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1600963514930">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1600963514930" />
+    <state x="442" y="247" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1600963504762">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="442" y="247" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.680@0.0.1280.680" timestamp="1600963504762" />
+    <state x="303" y="1" key="search.everywhere.popup" timestamp="1600963645718">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="303" y="1" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1600963645718" />
   </component>
 </project>

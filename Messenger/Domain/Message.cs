@@ -9,6 +9,10 @@ namespace Messenger.Domain
         public Guid MessageCreator { get; }
         public String MessageText { get; set; }
 
+        public bool MessageNotificationStatus { get; }
+
+        public string MessageNotification { get; }
+
         public Message(User user, String messageText)
         {
             if (user == null)
@@ -20,6 +24,8 @@ namespace Messenger.Domain
             CreatedDate = DateTime.Now;
             MessageCreator = user.UserId;
             MessageText = messageText;
+            MessageNotification = "The message was created!";
+            MessageNotificationStatus = true;
 
 
         }

@@ -8,5 +8,9 @@ namespace Messenger.Domain
         DateTime CreatedDate { get; }
         Guid MessageCreator { get; }
         String MessageText { get; set; }
+        
+        bool MessageNotificationStatus { get; }
+        
+        String MessageNotification { get; }
     }
 }
