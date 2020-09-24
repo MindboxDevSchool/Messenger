@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Messenger.Domain;
 
 namespace Messenger.Application
@@ -22,6 +24,18 @@ namespace Messenger.Application
                 chat.PostMessage(message);
                 _chatRepository.Update(chat);
             }
+        }
+
+        public IEnumerable<Message> RequestNewMessages(Guid chatId, Guid userId)
+        {
+            var user = _userRepository.GetBy(userId);
+            if (user.AvailableChats.Contains<>(chatId))
+            {
+                var newMessages = _chatRepository.LoadNewFor(chatId);
+                return newMessages;
+            }
+            
+            throw new ChatNotFoundException(chatId);
         }
 
         public void DeleteMessage(Guid chatId, Guid userId, Guid messageId, bool isOwnMessage)
