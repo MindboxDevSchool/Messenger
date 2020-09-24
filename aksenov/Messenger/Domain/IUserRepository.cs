@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Messenger.Domain;
 
-namespace Messenger.Application
+namespace Messenger.Domain
 {
     public interface IUserRepository
     {

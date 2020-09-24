@@ -105,10 +105,10 @@ namespace Messenger.Domain
             _availableRoles = new List<RoleType>(availableRoles);
         }
 
-        protected readonly List<Message> _messages;
+        private readonly List<Message> _messages;
 
-        protected readonly List<ChatMember> _members;
+        private readonly List<ChatMember> _members;
 
-        protected readonly List<RoleType> _availableRoles;
+        private readonly List<RoleType> _availableRoles;
     }
 }

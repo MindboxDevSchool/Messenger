@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Messenger.Domain;
 
-namespace Messenger.Application
+namespace Messenger.Domain
 {
     public interface IChatRepository
     {

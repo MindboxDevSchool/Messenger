@@ -15,19 +15,17 @@ namespace Messenger.Domain
         
         public IChat Create(ChatType chatType, string name, Guid creatorId)
         {
-            switch (chatType)
+            return chatType switch
             {
-                case ChatType.Channel: return getNewChannelChat(name, creatorId);
-                case ChatType.Group: return getNewGroupChat(name, creatorId);
-                case ChatType.Private: return getNewPrivateChat(name, creatorId);
-                default: throw new ChatTypeNotRecognizedException(chatType);
-            }
+                ChatType.Channel => GetNewChannelChat(name, creatorId),
+                ChatType.Group => GetNewGroupChat(name, creatorId),
+                ChatType.Private => GetNewPrivateChat(name, creatorId),
+                _ => throw new ChatTypeNotRecognizedException(chatType)
+            };
         }
 
-        private Chat getNewChannelChat(string name, Guid creatorId)
+        private Chat GetNewChannelChat(string name, Guid creatorId)
         {
-            var messages = new List<Message>();
-            
             var creator = _userRepository.GetBy(creatorId);
             var members = new List<ChatMember>()
             {
@@ -44,14 +42,12 @@ namespace Messenger.Domain
 
             var maxMembers = _messengerSettings.MaxMembers[ChatType.Channel];
                     
-            return new Chat(Guid.NewGuid(), name, ChatType.Channel, messages, 
+            return new Chat(Guid.NewGuid(), name, ChatType.Channel, new List<Message>(), 
                                 members, availableRoles,maxMembers, defaultRole);
         }
         
-        private Chat getNewGroupChat(string name, Guid creatorId)
+        private Chat GetNewGroupChat(string name, Guid creatorId)
         {
-            var messages = new List<Message>();
-            
             var creator = _userRepository.GetBy(creatorId);
             var members = new List<ChatMember>()
             {
@@ -68,14 +64,12 @@ namespace Messenger.Domain
 
             var maxMembers = _messengerSettings.MaxMembers[ChatType.Group];
                     
-            return new Chat(Guid.NewGuid(), name, ChatType.Group, messages, 
+            return new Chat(Guid.NewGuid(), name, ChatType.Group, new List<Message>(), 
                 members, availableRoles,maxMembers, defaultRole);
         }
         
-        private Chat getNewPrivateChat(string name, Guid creatorId)
+        private Chat GetNewPrivateChat(string name, Guid creatorId)
         {
-            var messages = new List<Message>();
-            
             var creator = _userRepository.GetBy(creatorId);
             var members = new List<ChatMember>()
             {
@@ -91,11 +85,11 @@ namespace Messenger.Domain
 
             var maxMembers = _messengerSettings.MaxMembers[ChatType.Private];
                     
-            return new Chat(Guid.NewGuid(), name, ChatType.Private, messages, 
+            return new Chat(Guid.NewGuid(), name, ChatType.Private, new List<Message>(), 
                 members, availableRoles,maxMembers, defaultRole);
         }
         
-        private MessengerSettings _messengerSettings;
-        private IUserRepository _userRepository;
+        private readonly MessengerSettings _messengerSettings;
+        private readonly IUserRepository _userRepository;
     }
 }
