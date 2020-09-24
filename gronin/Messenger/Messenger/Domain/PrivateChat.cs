@@ -6,7 +6,7 @@ namespace Messenger.Domain
     {
         public PrivateChat(IUser creator,IUser user2,
                            IMessageInGroupRepository messages, 
-                           IUsersRepository users,Guid id) : base(creator, messages, users,id)
+                           IUsersRepository users) : base(creator, messages, users)
         {
             _memberRepository.CreateUser(user2);
         }

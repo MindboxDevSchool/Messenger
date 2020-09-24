@@ -11,9 +11,9 @@ namespace Messenger.Domain
             protected readonly IMessageInGroupRepository _messageRepository;
             protected readonly IUsersRepository _memberRepository;
 
-            public Group(IUser creator,IMessageInGroupRepository messages,IUsersRepository users,Guid id)
+            public Group(IUser creator,IMessageInGroupRepository messages,IUsersRepository users)
             {
-                Id = id;
+                Id = Guid.NewGuid();
                 CreatedBy = creator;
                 _messageRepository = messages;
                 _memberRepository = users;

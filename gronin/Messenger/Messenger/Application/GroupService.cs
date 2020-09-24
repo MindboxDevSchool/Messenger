@@ -23,19 +23,19 @@ namespace Messenger.Application
         public void CreateChat(string name, IUser user)
         {
             var id = Guid.NewGuid();
-            var chat = new Chat(user,_messageInGroupRepository,_usersRepository,id);
+            var chat = new Chat(user,_messageInGroupRepository,_usersRepository);
         }
 
         public void CreatePrivateChat(string name, IUser user1,IUser user2)
         {
             var id = Guid.NewGuid();
-            var chat = new PrivateChat(user1, user2, _messageInGroupRepository, _usersRepository,id);
+            var chat = new PrivateChat(user1, user2, _messageInGroupRepository, _usersRepository);
         }
 
         public void CreateChannel(string name, IUser user)
         {
             var id = Guid.NewGuid();
-            var chat = new GroupChannel(user,_messageInGroupRepository,_usersRepository,id);
+            var chat = new GroupChannel(user,_messageInGroupRepository,_usersRepository);
         }
 
         public void DeleteGroup(Guid id)

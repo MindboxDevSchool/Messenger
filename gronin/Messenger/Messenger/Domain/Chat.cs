@@ -11,8 +11,8 @@ namespace Messenger.Domain
 
         public Chat(IUser creator,
                      IMessageInGroupRepository messages,
-                     IUsersRepository users,Guid id) 
-                     : base(creator, messages, users,id)
+                     IUsersRepository users) 
+                     : base(creator, messages, users)
         {
             _groupAdmins.Add(creator);
         }

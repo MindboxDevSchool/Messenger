@@ -10,7 +10,7 @@ namespace Messenger.Domain
         private readonly IUser _author;
         public GroupChannel(IUser creator, 
                             IMessageInGroupRepository messages,
-                            IUsersRepository users,Guid id) : base(creator, messages, users,id)
+                            IUsersRepository users) : base(creator, messages, users)
         {
             _author = creator;
         }
