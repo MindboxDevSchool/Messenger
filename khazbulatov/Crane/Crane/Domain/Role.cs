@@ -38,12 +38,12 @@ namespace Crane.Domain
             Permission.DeleteAny
         });
         
-        public string Name { get; }
+        public string Label { get; }
         public IEnumerable<Permission> Permissions { get; }
         
-        public Role(string name, IEnumerable<Permission> permissions)
+        public Role(string label, IEnumerable<Permission> permissions)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Label = label ?? throw new ArgumentNullException(nameof(label));
             Permissions = permissions ?? throw new ArgumentNullException(nameof(permissions));
         }
     }

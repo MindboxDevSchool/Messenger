@@ -5,6 +5,6 @@ namespace Crane.Domain
     public interface IRole
     {
         IEnumerable<Permission> Permissions { get; }
-        string Name { get; }
+        string Label { get; }
     }
 }
