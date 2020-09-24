@@ -13,7 +13,7 @@ namespace Messenger.Domain
 
         public DateTime DepartureDate { get; }
 
-        private Message(Guid id, Guid userId, string content, DateTime departureDate)
+        public Message(Guid id, Guid userId, string content, DateTime departureDate)
         {
             UserId = userId;
             Content = content;

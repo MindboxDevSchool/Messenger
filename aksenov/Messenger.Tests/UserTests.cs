@@ -8,7 +8,7 @@ namespace Messenger.Tests
     public class UserTests
     {
         [Test]
-        public void HaveAccessTo_AvailableActions()
+        public void HaveAccessTo_NotAvailableActionType_ReturnFalse()
         {
             // arrange
             var chatId = Guid.NewGuid();
