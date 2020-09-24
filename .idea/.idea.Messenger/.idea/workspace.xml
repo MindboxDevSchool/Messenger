@@ -4,10 +4,17 @@
     <projectFile>Usage/Usage.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b49e5c-dfdc-4971-a7e2-eb878183fac9" name="Default Changelist" comment="project added">
+    <list default="true" id="82b49e5c-dfdc-4971-a7e2-eb878183fac9" name="Default Changelist" comment="Notifications Start Implementation">
+      <change afterPath="$PROJECT_DIR$/Messenger/Domain/ChannelChat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Messenger/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Messenger/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Messenger/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Messenger/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Messenger/Domain/IMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/IMessage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Messenger/Domain/Message.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/Message.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/Channel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/Chat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/Chat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/Group.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/GroupChat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Infrastructure/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Infrastructure/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Infrastructure/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Infrastructure/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Messenger.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Messenger.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,28 +24,37 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/Злата/RiderProjects/Messenger/Messenger/Domain/IMessage.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Messenger/Domain/IUser.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/User.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Infrastructure/IUserRepository.cs" />
         <option value="$PROJECT_DIR$/Messenger/Usage.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/IChatRepository.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/ChatRepository.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Infrastructure/UserRepository.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/IChat.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/MessageRepository.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/IMessageRepository.cs" />
         <option value="$PROJECT_DIR$/Usage/Program.cs" />
         <option value="$PROJECT_DIR$/Usage/CompositionRoot.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/Chat.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/Channel.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/Group.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" />
         <option value="$PROJECT_DIR$/MessengerUnitTests/Tests.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/IMessage.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/Message.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/Channel.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Infrastructure/IUserRepository.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Infrastructure/UserRepository.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/IUserService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/Chat.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/ChannelChat.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/GroupChat.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/UserService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/IChatService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/ChatService.cs" />
       </list>
     </option>
   </component>
@@ -80,7 +96,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600951726642</updated>
-      <workItem from="1600951735600" duration="10265000" />
+      <workItem from="1600951735600" duration="17889000" />
     </task>
     <task id="LOCAL-00001" summary="project added">
       <created>1600963343062</created>
@@ -89,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600963343062</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Notifications Start Implementation">
+      <created>1600963872479</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1600963872479</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -100,7 +123,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="project added" />
-    <option name="LAST_COMMIT_MESSAGE" value="project added" />
+    <MESSAGE value="Notifications Start Implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Notifications Start Implementation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="518" y="238" key="Github.ShareDialog" timestamp="1600963422177">
@@ -111,10 +135,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="73" key="Rider.ProjectTemplateDialog.Size/0.0.1280.680@0.0.1280.680" timestamp="1600962662724" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1600963514930">
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1600963884001">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1600963514930" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1600963884001" />
     <state x="442" y="247" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1600963504762">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

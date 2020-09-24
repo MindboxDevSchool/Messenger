@@ -13,17 +13,17 @@ namespace Messenger.Domain
         protected readonly IMessageRepository _messageRepository;
         protected readonly IUserRepository _userRepository;
 
-        public Chat(User user)
+        public Chat(User chatCreator)
         {
             CreatedDate = DateTime.Now;
-            ChatCreator = user;
+            ChatCreator = chatCreator;
             _messageRepository = new MessageRepository();
             _userRepository = new UserRepository();
-            _userRepository.CreateUser(user);
+            _userRepository.AddUser(chatCreator);
         }
 
         protected abstract bool MessageSendingPermission(User user);
-        protected abstract bool MessageEditingPermission(User user);
+        protected abstract bool MessageEditingPermission(User user, Message message);
         protected abstract bool MessageDeletingPermission(User user);
 
         public Guid SendMessage(User user, string messageText)
@@ -48,7 +48,7 @@ namespace Messenger.Domain
 
         public void EditMessage(User user, Message message, string newMessageText)
         {
-            if ((MessageEditingPermission(user))
+            if ((MessageEditingPermission(user, message))
                 && (_userRepository.GetUser(user.UserId) != null))
             {
                 message.MessageText = newMessageText;

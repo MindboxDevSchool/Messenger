@@ -38,9 +38,13 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Domain\Channel.cs" />
+        <Compile Include="Application\ChatService.cs" />
+        <Compile Include="Application\IChatService.cs" />
+        <Compile Include="Application\IUserService.cs" />
+        <Compile Include="Application\UserService.cs" />
+        <Compile Include="Domain\ChannelChat.cs" />
         <Compile Include="Domain\Chat.cs" />
-        <Compile Include="Domain\Group.cs" />
+        <Compile Include="Domain\GroupChat.cs" />
         <Compile Include="Domain\PrivateChat.cs" />
         <Compile Include="Infrastructure\ChatRepository.cs" />
         <Compile Include="Infrastructure\IChatRepository.cs" />
@@ -54,9 +58,6 @@
         <Compile Include="Infrastructure\IMessageRepository.cs" />
         <Compile Include="Infrastructure\IUserRepository.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Application" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

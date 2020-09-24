@@ -8,7 +8,7 @@ namespace Messenger.Infrastructure
     {
         private readonly Dictionary<Guid, User> _userDictionary = new Dictionary<Guid, User>();
 
-        public void CreateUser(User user)
+        public void AddUser(User user)
         {
             _userDictionary[user.UserId] = user;
         }

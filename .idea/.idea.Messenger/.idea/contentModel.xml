@@ -6,12 +6,17 @@
     <e p="C:\Users\Злата\AppData\Roaming\JetBrains\Rider2020.2\scratches" t="IncludeRecursive" />
     <e p="C:\Users\Злата\RiderProjects\Messenger" t="IncludeFlat">
       <e p="Messenger" t="IncludeRecursive">
-        <e p="Application" t="Include" />
+        <e p="Application" t="Include">
+          <e p="ChatService.cs" t="Include" />
+          <e p="IChatService.cs" t="Include" />
+          <e p="IUserService.cs" t="Include" />
+          <e p="UserService.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Domain" t="Include">
-          <e p="Channel.cs" t="Include" />
+          <e p="ChannelChat.cs" t="Include" />
           <e p="Chat.cs" t="Include" />
-          <e p="Group.cs" t="Include" />
+          <e p="GroupChat.cs" t="Include" />
           <e p="IChat.cs" t="Include" />
           <e p="IMessage.cs" t="Include" />
           <e p="IUser.cs" t="Include" />
