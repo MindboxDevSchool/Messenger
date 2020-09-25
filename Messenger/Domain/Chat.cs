@@ -63,7 +63,7 @@ namespace Messenger.Domain
         public void DeleteMessage(IUser user, IMessage message)
         {
             if ((MessageDeletingPermission(user))
-                && (_userRepository.GetUser(user.UserId) != null))
+                && (user != null))
             {
                 _messageRepository.DeleteMessage(message.MessageId);
             }

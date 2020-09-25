@@ -1,0 +1,11 @@
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\bin\Debug\MessengerUnitTests.dll
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\bin\Debug\MessengerUnitTests.pdb
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\bin\Debug\Messenger.dll
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\bin\Debug\nunit.framework.dll
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\bin\Debug\Messenger.pdb
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\bin\Debug\nunit.framework.xml
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\obj\Debug\MessengerUnitTests.csprojAssemblyReference.cache
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\obj\Debug\MessengerUnitTests.csproj.CoreCompileInputs.cache
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\obj\Debug\MessengerUnitTests.csproj.CopyComplete
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\obj\Debug\MessengerUnitTests.dll
+C:\Users\Злата\RiderProjects\Messenger\MessengerUnitTests\obj\Debug\MessengerUnitTests.pdb
