@@ -4,57 +4,164 @@ using Messanger.Domain.MessageModel;
 
 namespace Messanger.Domain.ChatModel
 {
-    public class Group : IGroupChat
+    public class Group : ChatModel.Chat ,IGroupChat
     {
-        public string Name { get; }
-        public Guid Id { get; }
-        public IEnumerable<Guid> MemberIdCollection { get; }
-        public IEnumerable<IMessage> MessageCollection { get; }
-        public void SendMessage(IMessage message)
+        public Group(string name, List<Guid> memberCollection, Guid ownerId, List<Guid> adminIdCollection)
+            : base(name, memberCollection)
         {
-            throw new NotImplementedException();
+            this._ownerId = ownerId;
+            this._adminIdCollection = new List<Guid>(adminIdCollection);
+            this._adminIdCollection.Add(this._ownerId);
+        }
+        
+        private Guid _ownerId;
+        public Guid OwnerId
+        {
+            get { return this._ownerId; }
         }
 
-        public void EditMessage(Guid oldmessageId, IMessage message)
+        private List<Guid> _adminIdCollection;
+        public IEnumerable<Guid> AdminIdCollection
         {
-            throw new NotImplementedException();
+            get { return new List<Guid>(this._adminIdCollection); }
+        }
+        public bool CheckIfUserCanEditMemberIdCollection(Guid userId)
+        {
+            return this._adminIdCollection.Contains(userId);
         }
 
-        public void DeleteMessage(Guid messageId)
+        void IGroupChat.AddUser(Guid userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (((IGroupChat) this).CheckIfUserCanEditMemberIdCollection(userId))
+                {
+                    this._memberCollection.Add(userId);
+                }
+                else
+                {
+                    throw new Exception("You have no rights to add users in this group");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
-        public Guid OwnerId { get; }
-        public IEnumerable<Guid> AdminIdCollection { get; }
-        bool IGroupChat.CheckIfUserCanEditMemberIdCollection(Guid userId)
+        void IGroupChat.RemoveUser(Guid userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (((IGroupChat) this).CheckIfUserCanEditMemberIdCollection(userId))
+                {
+                    if(this._memberCollection.Find(member => member == userId).Equals(null))
+                        throw new Exception("there is no such user in this group!");
+                    this._memberCollection.Remove(userId);
+                }
+                else
+                {
+                    throw new Exception("You have no rights to remove users in this group");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
-        public void AddUser(Guid userId)
+
+        public bool CheckIfUserCanSendMessage(Guid user)
         {
-            throw new NotImplementedException();
+            return this._memberCollection.Contains(user);
         }
 
-        public void RemoveUser(Guid userId)
+        public bool CheckIfUserCanEditMessage(Guid user, Guid messageId)
         {
-            throw new NotImplementedException();
+            IMessage message = base.GetMessageById(messageId);
+            if (message.SenderUserId == user)
+                return true;
+            else
+            {
+                return false;
+            }
         }
 
-        bool IGroupChat.CheckIfUserCanSendMessage(Guid user)
+        public bool CheckIfUserCanDeleteMessage(Guid user, Guid messageId)
         {
-            throw new NotImplementedException();
+            if (this._adminIdCollection.Contains(user))
+            {
+                return true;
+            }
+            else
+            {
+                IMessage message = base.GetMessageById(messageId);
+                if (message.SenderUserId == user)
+                    return true;
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        
+        public override void SendMessage(IMessage message)
+        {
+            try
+            {
+                if (((IGroupChat) this).CheckIfUserCanSendMessage(message.SenderUserId))
+                {
+                    base.SendMessage(message);
+                }
+                else
+                {
+                    throw new Exception("You have no rights to send messages in this group");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
-        bool IGroupChat.CheckIfUserCanEditMessage(Guid user)
+        public override void EditMessage(Guid oldmessageId, object content)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IMessage oldMessage = base.GetMessageById(oldmessageId);
+                if (((IGroupChat) this).CheckIfUserCanEditMessage(oldMessage.SenderUserId, oldmessageId))
+                {
+                    base.EditMessage(oldmessageId, content);
+                }
+                else
+                {
+                    throw new Exception("You have no rights to edit messages in this group");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
-        bool IGroupChat.CheckIfUserCanDeleteMessage(Guid user)
+        public override void DeleteMessage(Guid messageId)
         {
-            throw new NotImplementedException();
+            IMessage message = base.GetMessageById(messageId);
+            try
+            {
+                if (((IGroupChat) this).CheckIfUserCanDeleteMessage(message.SenderUserId, messageId))
+                {
+                    base.DeleteMessage(messageId);
+                }
+                else
+                {
+                    throw new Exception("You have no rights to delete messages in this group");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

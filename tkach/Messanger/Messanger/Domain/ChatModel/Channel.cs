@@ -38,7 +38,7 @@ namespace Messanger.Domain.ChatModel
             try
             {
                 IMessage oldMessage = base.GetMessageById(oldmessageId);
-                if (((IGroupChat) this).CheckIfUserCanEditMessage(oldMessage.SenderUserId))
+                if (((IGroupChat) this).CheckIfUserCanEditMessage(oldMessage.SenderUserId, oldmessageId))
                 {
                     base.EditMessage(oldmessageId, content);
                 }
@@ -58,7 +58,7 @@ namespace Messanger.Domain.ChatModel
             IMessage message = base.GetMessageById(messageId);
             try
             {
-                if (((IGroupChat) this).CheckIfUserCanDeleteMessage(message.SenderUserId))
+                if (((IGroupChat) this).CheckIfUserCanDeleteMessage(message.SenderUserId, messageId))
                 {
                     base.DeleteMessage(messageId);
                 }
@@ -82,14 +82,14 @@ namespace Messanger.Domain.ChatModel
         private List<Guid> _adminIdCollection;
         public IEnumerable<Guid> AdminIdCollection
         {
-            get { return this._adminIdCollection; }
+            get { return new List<Guid>(this._adminIdCollection); }
         }
         bool IGroupChat.CheckIfUserCanEditMemberIdCollection(Guid userId)
         {
             return userId == this._ownerId ? true : false;
         }
 
-        public void AddUser(Guid userId)
+        void IGroupChat.AddUser(Guid userId)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace Messanger.Domain.ChatModel
             }
         }
 
-        public void RemoveUser(Guid userId)
+        void IGroupChat.RemoveUser(Guid userId)
         {
             try
             {
@@ -134,12 +134,12 @@ namespace Messanger.Domain.ChatModel
             return user == this._ownerId ? true : false;
         }
 
-        bool IGroupChat.CheckIfUserCanEditMessage(Guid user)
+        bool IGroupChat.CheckIfUserCanEditMessage(Guid user, Guid messageId)
         {
             return user == this._ownerId ? true : false;
         }
 
-        bool IGroupChat.CheckIfUserCanDeleteMessage(Guid user)
+        bool IGroupChat.CheckIfUserCanDeleteMessage(Guid user, Guid messageId)
         {
             return user == this._ownerId ? true : false;
         }

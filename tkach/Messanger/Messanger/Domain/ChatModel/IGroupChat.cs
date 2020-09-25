@@ -14,7 +14,7 @@ namespace Messanger.Domain.ChatModel
         public void RemoveUser(Guid userId);
         
         bool CheckIfUserCanSendMessage(Guid user);
-        bool CheckIfUserCanEditMessage(Guid user);
-        bool CheckIfUserCanDeleteMessage(Guid user);
+        bool CheckIfUserCanEditMessage(Guid user, Guid messageId);
+        bool CheckIfUserCanDeleteMessage(Guid user, Guid messageId);
     }
 }
