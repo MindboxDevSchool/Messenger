@@ -2,8 +2,9 @@
 
 namespace Crane.Domain
 {
-    public interface IUser : ISender
+    public interface IUser : ISender, IIdentified
     {
-        public IEnumerable<IChat> Chats { get; }
+        IPasswordHandler PasswordHandler { get; }
+        IEnumerable<IChat> Chats { get; }
     }
 }

@@ -5,14 +5,14 @@ namespace Crane.Domain
 {
     public class Role : IRole
     {
-        public static Role Nobody = new Role("Nobody", new Permission[0]);
+        public static readonly Role Nobody = new Role("Nobody", new Permission[0]);
         
-        public static Role Viewer = new Role("Viewer", new Permission[]
+        public static readonly Role Viewer = new Role("Viewer", new Permission[]
         {
             Permission.Get
         });
         
-        public static Role Participant = new Role("Participant", new Permission[]
+        public static readonly Role Participant = new Role("Participant", new Permission[]
         {
             Permission.Get,
             Permission.Send,
@@ -20,7 +20,7 @@ namespace Crane.Domain
             Permission.DeleteOwn
         });
         
-        public static Role Author = new Role("Author", new Permission[]
+        public static readonly Role Author = new Role("Author", new Permission[]
         {
             Permission.Get,
             Permission.Send,
@@ -29,7 +29,7 @@ namespace Crane.Domain
             Permission.DeleteAny
         });
 
-        public static Role Administrator = new Role("Administrator", new Permission[]
+        public static readonly Role Administrator = new Role("Administrator", new Permission[]
         {
             Permission.Get,
             Permission.Send,

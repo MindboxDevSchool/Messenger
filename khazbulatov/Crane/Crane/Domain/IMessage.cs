@@ -2,7 +2,7 @@
 
 namespace Crane.Domain
 {
-    public interface IMessage
+    public interface IMessage : IIdentified
     {
         DateTime TimeSent { get; }
         ISender Sender { get; }
