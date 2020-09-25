@@ -12,14 +12,14 @@ namespace Messenger.Application
         // создать где-то объект chat со всеми параметрами и сюда передать
         public abstract IChat CreateChat(ChatType chatType, List<User> firstChatUsers);
 
-        public void GetChat(IChat chat)
+        public void GetChat(Guid chatId)
         {
-            _chatRepository.GetChat(chat.ChatId);
+            _chatRepository.GetChat(chatId);
         }
 
-        public void DeleteChat(IChat chat)
+        public void DeleteChat(Guid chatId)
         {
-            _chatRepository.DeleteChat(chat.ChatId);
+            _chatRepository.DeleteChat(chatId);
         }
 
         public ChatService(IChatRepository chatRepository)

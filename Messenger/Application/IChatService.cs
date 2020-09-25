@@ -14,7 +14,7 @@ namespace Messenger.Application
     {
         IChat CreateChat(ChatType chatType, List<User> firstChatUsers);
 
-        void GetChat(IChat chat);
-        void DeleteChat(IChat chat);
+        void GetChat(Guid chatId);
+        void DeleteChat(Guid chatId);
     }
 }
