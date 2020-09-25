@@ -38,7 +38,9 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Application\ChannelChatService.cs" />
         <Compile Include="Application\ChatService.cs" />
+        <Compile Include="Application\GroupChatService.cs" />
         <Compile Include="Application\IChatService.cs" />
         <Compile Include="Application\IUserService.cs" />
         <Compile Include="Application\UserService.cs" />

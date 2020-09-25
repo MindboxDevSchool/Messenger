@@ -8,7 +8,7 @@ namespace Messenger.Infrastructure
     {
         private readonly Dictionary<Guid, IChat> _chatDictionary = new Dictionary<Guid, IChat>();
 
-        public void CreateChat(IChat chat)
+        public void AddChat(IChat chat)
         {
             _chatDictionary[chat.ChatId] = chat;
         }

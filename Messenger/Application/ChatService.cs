@@ -1,31 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using Messenger.Domain;
 using Messenger.Infrastructure;
 
 namespace Messenger.Application
 {
-    public class ChatService : IChatService
+    public  abstract class ChatService : IChatService
     {
         private readonly IChatRepository _chatRepository;
-        
 
         // создать где-то объект chat со всеми параметрами и сюда передать
-        public Chat CreateChat(User chatCreator, String chatType)
+        public abstract IChat CreateChat(ChatType chatType, List<User> firstChatUsers);
+
+        public void GetChat(IChat chat)
         {
-            switch (chatType)
-            {
-                case "ChannelChat":
-                    Chat chat = new ChannelChat(chatCreator);
-                    break;
-                case "GroupChat":
-                    Chat chat = new GroupChat(chatCreator);
-                    break;
-                case "PrivateChat":
-                    Chat chat = new PrivateChat(chatCreator);
-                    break;
-                // abstrat?
-                    
-            }
+            _chatRepository.GetChat(chat.ChatId);
         }
 
         public void DeleteChat(IChat chat)
