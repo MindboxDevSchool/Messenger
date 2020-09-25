@@ -7,7 +7,8 @@ namespace Domain.User
     public interface IUser
     {
         public Guid Id { get; }
-        public Name Name { get; }
-        public IReadOnlyList<IChat> Chats { get; }
+        public UserName Name { get; }
+        public PhoneNumber PhoneNumber { get; }
+        public IReadOnlyList<Guid> ChatsIds { get; }
     }
 }

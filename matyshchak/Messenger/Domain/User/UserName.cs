@@ -1,6 +1,6 @@
 ﻿namespace Domain.User
 {
-    public class Name
+    public class UserName
     {
     }
 }
