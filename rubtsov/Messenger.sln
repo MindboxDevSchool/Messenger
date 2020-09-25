@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger", "Messenger\Messenger.csproj", "{8D40F10E-4B6F-425A-BC2D-8049B8BCD5FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualTester", "ManualTester\ManualTester.csproj", "{0732B897-F8F5-40F3-A278-FBD23FF5AD63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Tests", "Messenger.Tests\Messenger.Tests.csproj", "{9B4F4AF7-8CEE-4415-A904-A0126A051764}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D40F10E-4B6F-425A-BC2D-8049B8BCD5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D40F10E-4B6F-425A-BC2D-8049B8BCD5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D40F10E-4B6F-425A-BC2D-8049B8BCD5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D40F10E-4B6F-425A-BC2D-8049B8BCD5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0732B897-F8F5-40F3-A278-FBD23FF5AD63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0732B897-F8F5-40F3-A278-FBD23FF5AD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0732B897-F8F5-40F3-A278-FBD23FF5AD63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0732B897-F8F5-40F3-A278-FBD23FF5AD63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B4F4AF7-8CEE-4415-A904-A0126A051764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B4F4AF7-8CEE-4415-A904-A0126A051764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B4F4AF7-8CEE-4415-A904-A0126A051764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B4F4AF7-8CEE-4415-A904-A0126A051764}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
