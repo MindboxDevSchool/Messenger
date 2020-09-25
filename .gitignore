@@ -1,0 +1,6 @@
+﻿/markelov/.idea/
+/markelov/Messenger/bin/*
+/markelov/Messenger/obj/*
+/markelov/Messenger.UnitTests/bin/*
+/markelov/Messenger.UnitTests/obj/*
+/markelov/Messenger.UnitTests/netcoreapp2.1/*
