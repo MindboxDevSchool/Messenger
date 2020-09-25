@@ -9,12 +9,12 @@ namespace Messanger.Domain.ChatModel
         public Guid OwnerId { get; }
         public IEnumerable<Guid> AdminIdCollection { get; }
 
-        protected bool CheckIfUserCanEditMemberIdCollection(Guid userId);
+        bool CheckIfUserCanEditMemberIdCollection(Guid userId);
         public void AddUser(Guid userId);
         public void RemoveUser(Guid userId);
         
-        protected bool CheckIfUserCanSendMessage(Guid user);
-        protected bool CheckIfUserCanEditMessage(Guid user);
-        protected bool CheckIfUserCanDeleteMessage(Guid user);
+        bool CheckIfUserCanSendMessage(Guid user);
+        bool CheckIfUserCanEditMessage(Guid user);
+        bool CheckIfUserCanDeleteMessage(Guid user);
     }
 }

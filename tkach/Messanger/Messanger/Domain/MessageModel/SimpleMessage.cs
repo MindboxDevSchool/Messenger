@@ -11,6 +11,13 @@ namespace Messanger.Domain.MessageModel
             get { return this._id; }
         }
 
+        private Guid _senderUserId;
+        public Guid SenderUserId
+        {
+            get { return this._senderUserId; }
+        }
+
+        
         private object _content;
         public object Content
         {
@@ -30,9 +37,10 @@ namespace Messanger.Domain.MessageModel
             get { return this._editDateTime; }
         }
 
-        public SimpleMessage(object content)
+        public SimpleMessage(object content, Guid senderUserId)
         {
             this._id = new Guid();
+            this._senderUserId = senderUserId;
             this._content = content;
             this._creationDateTime = DateTime.Now;
             this._editDateTime = this._creationDateTime;

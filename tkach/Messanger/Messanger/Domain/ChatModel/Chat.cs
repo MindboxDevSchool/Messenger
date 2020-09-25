@@ -7,53 +7,62 @@ namespace Messanger.Domain.ChatModel
 {
     public class Chat : IChat
     {
-        private string _name;
+        protected string _name;
         public string Name
         {
             get { return this._name; }
         }
 
-        private Guid _id;
+        protected Guid _id;
         public Guid Id
         {
             get { return this._id; }
         }
 
-        private Guid _ownerId;
-        public Guid OwnerId
-        {
-            get { return this._ownerId; }
-        }
-
-        private List<Guid> _adminIdCollection;
-        public IEnumerable<Guid> AdminIdCollection
-        {
-            get { return new List<Guid>(this._adminIdCollection); }
-        }
-
-        private List<Guid> _memberCollection;
+        protected List<Guid> _memberCollection;
         public IEnumerable<Guid> MemberIdCollection
         {
             get { return new List<Guid>(this._memberCollection); }
         }
 
-        private List<IMessage> _messageCollection;
-        public IEnumerable<IMessage> MessageCollection { get; }
+        protected List<IMessage> _messageCollection;
+        public IEnumerable<IMessage> MessageCollection
+        {
+            get { return new List<IMessage>(this._messageCollection); }
+        }
         
-        public void SendMessage(IMessage message)
+        public virtual void SendMessage(IMessage message)
         {
             this._messageCollection.Add(message);
         }
 
-        public void EditMessage(Guid oldMessageId, object content)
+        public virtual void EditMessage(Guid oldMessageId, object content)
         {
-            IMessage oldMessage = this._messageCollection.Find(message => message.Id == oldMessageId);
+            IMessage oldMessage = this.GetMessageById(oldMessageId);
             oldMessage.Content = content;
         }
 
-        public void DeleteMessage(Guid messageId)
+        public virtual void DeleteMessage(Guid messageId)
         {
-            this._messageCollection.Remove(this._messageCollection.Find(message => message.Id == messageId));
+            this._messageCollection.Remove(this.GetMessageById(messageId));
+        }
+
+        protected IMessage GetMessageById(Guid messageId)
+        {
+            return this._messageCollection.Find(message => message.Id == messageId);
+        }
+
+        public Chat(string name, List<Guid> memberCollection)
+        {
+            this._id = new Guid();
+            this._name = name;
+            this._memberCollection = new List<Guid>(memberCollection);
+            this._messageCollection = new List<IMessage>();
+        }
+
+        public Chat()
+        {
+            
         }
     }
 }
