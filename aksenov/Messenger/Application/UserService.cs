@@ -12,7 +12,7 @@ namespace Messenger.Application
             _messengerSettings = messengerSettings;
         }
 
-        public void CreateNewUser(string name, string phone)
+        public Guid CreateNewUser(string name, string phone)
         {
             if (name == null) throw new ArgumentNullException(nameof(name));
             if (phone == null) throw new ArgumentNullException(nameof(phone));
@@ -22,6 +22,7 @@ namespace Messenger.Application
             var user = new User(userId, name, phone, availableRoles);
 
             _userRepository.Save(user);
+            return userId;
         }
 
         public void AddChatTo(Guid userId, Guid chatId, RoleType roleType)
