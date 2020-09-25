@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Messenger.Application;
 using Messenger.Domain;
 using NUnit.Framework;
 
