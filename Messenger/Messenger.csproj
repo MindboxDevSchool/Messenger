@@ -43,6 +43,7 @@
         <Compile Include="Application\GroupChatService.cs" />
         <Compile Include="Application\IChatService.cs" />
         <Compile Include="Application\IUserService.cs" />
+        <Compile Include="Application\PrivateChatService.cs" />
         <Compile Include="Application\UserService.cs" />
         <Compile Include="Domain\ChannelChat.cs" />
         <Compile Include="Domain\Chat.cs" />

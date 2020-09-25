@@ -5,11 +5,11 @@ using Messenger.Infrastructure;
 
 namespace Messenger.Application
 {
-    public class GroupChatService : ChatService
+    public class PrivateChatService : ChatService
     {
         private IChatRepository _chatRepository;
         
-        public GroupChatService(IChatRepository chatRepository) : base(chatRepository)
+        public PrivateChatService(IChatRepository chatRepository) : base(chatRepository)
         {
             _chatRepository = chatRepository;
         }
@@ -17,15 +17,15 @@ namespace Messenger.Application
         
         public override IChat CreateChat(ChatType chatType, List<User> firstChatUsers)
         {
-            if (firstChatUsers.Count == 1)
+            if (firstChatUsers.Count == 2)
             {
-                IChat groupChat = new GroupChat(firstChatUsers[0]);
+                IChat privateChat = new PrivateChat(firstChatUsers[0], firstChatUsers[1]);
                 
-                _chatRepository.AddChat(groupChat);
-                return groupChat;
+                _chatRepository.AddChat(privateChat);
+                return privateChat;
             }
             
-            throw new InvalidDataException("The group has to be created by the only one user!");
+            throw new InvalidDataException("The private chat has to be created with two users!");
         }
     }
 }
