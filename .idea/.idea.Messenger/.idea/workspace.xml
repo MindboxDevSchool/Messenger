@@ -4,10 +4,21 @@
     <projectFile>Usage/Usage.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b49e5c-dfdc-4971-a7e2-eb878183fac9" name="Default Changelist" comment="folder commit">
+    <list default="true" id="82b49e5c-dfdc-4971-a7e2-eb878183fac9" name="Default Changelist" comment="Function parameters changed from IChat to Guid type">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Messenger/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Messenger/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Application/ChannelChatService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Application/ChannelChatService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Messenger/Application/ChatService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Application/ChatService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Application/GroupChatService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Application/GroupChatService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Messenger/Application/IChatService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Application/IChatService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Application/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Application/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Application/PrivateChatService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Application/PrivateChatService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Application/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Application/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/ChannelChat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/ChannelChat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/Chat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/Chat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/GroupChat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/GroupChat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/IUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/IUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messenger/Domain/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Messenger/Domain/User.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,14 +36,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Messenger/Domain/IUser.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/User.cs" />
         <option value="$PROJECT_DIR$/Messenger/Usage.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/IChat.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/MessageRepository.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/IMessageRepository.cs" />
         <option value="$PROJECT_DIR$/Usage/Program.cs" />
-        <option value="$PROJECT_DIR$/Usage/CompositionRoot.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/Group.cs" />
         <option value="$PROJECT_DIR$/MessengerUnitTests/Tests.cs" />
         <option value="$PROJECT_DIR$/Messenger/Domain/IMessage.cs" />
@@ -40,19 +48,22 @@
         <option value="$PROJECT_DIR$/Messenger/Domain/Channel.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/IUserRepository.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/UserRepository.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Application/IUserService.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/Chat.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/ChannelChat.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Domain/GroupChat.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Application/UserService.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/IChatRepository.cs" />
         <option value="$PROJECT_DIR$/Messenger/Infrastructure/ChatRepository.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Application/ChannelChatService.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Application/GroupChatService.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Application/PrivateChatService.cs" />
-        <option value="$PROJECT_DIR$/Messenger/Application/ChatService.cs" />
+        <option value="$PROJECT_DIR$/Usage/CompositionRoot.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/IUser.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/IUserService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/UserService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/User.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/Chat.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/ChannelChat.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/GroupChat.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Domain/PrivateChat.cs" />
         <option value="$PROJECT_DIR$/Messenger/Application/IChatService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/GroupChatService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/ChatService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/PrivateChatService.cs" />
+        <option value="$PROJECT_DIR$/Messenger/Application/ChannelChatService.cs" />
       </list>
     </option>
   </component>
@@ -94,7 +105,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600951726642</updated>
-      <workItem from="1600951735600" duration="24667000" />
+      <workItem from="1600951735600" duration="26336000" />
     </task>
     <task id="LOCAL-00001" summary="project added">
       <created>1600963343062</created>
@@ -138,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601030262366</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Function parameters changed from IChat to Guid type">
+      <created>1601030493478</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1601030493478</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +172,8 @@
     <MESSAGE value="folder commit" />
     <MESSAGE value="creating chats modules" />
     <MESSAGE value="Different types of chats creation interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Different types of chats creation interface" />
+    <MESSAGE value="Function parameters changed from IChat to Guid type" />
+    <option name="LAST_COMMIT_MESSAGE" value="Function parameters changed from IChat to Guid type" />
   </component>
   <component name="WindowStateProjectService">
     <state x="518" y="238" key="Github.ShareDialog" timestamp="1600963422177">
@@ -165,10 +184,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="73" key="Rider.ProjectTemplateDialog.Size/0.0.1280.680@0.0.1280.680" timestamp="1600962662724" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1601030269638">
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1601030499037">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1601030269638" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1601030499037" />
     <state x="442" y="247" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1600963504762">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

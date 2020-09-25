@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Messenger.Domain
 {
     public class GroupChat : Chat
     {
         public List<User> _groupAdministrators = new List<User>();
+        public String ChatName { get; }
         
-        public GroupChat(User chatCreator) : base(chatCreator)
+        public GroupChat(User chatCreator, String chatName) : base(chatCreator, chatName)
         {
             _groupAdministrators.Add(chatCreator);
+            ChatName = chatName;
         }
 
         public void AddGroupAdministrator(User user)

@@ -8,15 +8,17 @@ namespace Messenger.Domain
         public Guid ChatId { get; }
         public User ChatCreator { get; }
         public DateTime CreatedDate { get; }
-        public string ChatName { get; protected set; }
+        public string ChatName { get; }
         
         protected readonly IMessageRepository _messageRepository;
         protected readonly IUserRepository _userRepository;
 
-        public Chat(User chatCreator)
+        public Chat(User chatCreator, String chatName)
         {
             CreatedDate = DateTime.Now;
             ChatCreator = chatCreator;
+            ChatId = Guid.NewGuid();
+            ChatName = chatName;
             _messageRepository = new MessageRepository();
             _userRepository = new UserRepository();
             _userRepository.AddUser(chatCreator);

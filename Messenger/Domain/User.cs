@@ -7,10 +7,13 @@ namespace Messenger.Domain
         public Guid UserId { get; }
         public String Login { get; }
 
-        public User(String login)
+        public String Password { get; }
+
+        public User(String login, String password)
         {
             UserId = Guid.NewGuid();
             Login = login;
+            Password = password;
         }
     }
 }

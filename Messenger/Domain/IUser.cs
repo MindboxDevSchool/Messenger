@@ -6,5 +6,7 @@ namespace Messenger.Domain
     {
         Guid UserId { get; }
         String Login { get; }
+        
+        String Password { get; }
     }
 }

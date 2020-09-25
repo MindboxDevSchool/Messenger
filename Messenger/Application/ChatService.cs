@@ -10,7 +10,7 @@ namespace Messenger.Application
         private readonly IChatRepository _chatRepository;
 
         // создать где-то объект chat со всеми параметрами и сюда передать
-        public abstract IChat CreateChat(ChatType chatType, List<User> firstChatUsers);
+        public abstract IChat CreateChat(ChatType chatType, List<User> firstChatUsers, String chatName);
 
         public void GetChat(Guid chatId)
         {

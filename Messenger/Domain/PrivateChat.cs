@@ -1,10 +1,14 @@
-﻿namespace Messenger.Domain
+﻿using System;
+
+namespace Messenger.Domain
 {
     public class PrivateChat : Chat
     {
-        public PrivateChat(User chatCreator, User secondUser) : base(chatCreator)
+        public String ChatName { get; }
+        public PrivateChat(User chatCreator, User secondUser, String chatName) : base(chatCreator, chatName)
         {
             _userRepository.AddUser(secondUser);
+            ChatName = chatName;
         }
 
         protected override bool MessageSendingPermission(User user)

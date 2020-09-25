@@ -8,9 +8,9 @@ namespace Messenger.Application
     {
         private readonly IUserRepository _userRepository;
 
-        public User CreateUser(String login)
+        public User CreateUser(String login, String password)
         {
-            User user = new User(login);
+            User user = new User(login, password);
             _userRepository.AddUser(user);
             return user;
         }

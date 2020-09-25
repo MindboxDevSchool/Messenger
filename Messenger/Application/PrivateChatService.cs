@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Messenger.Domain;
 using Messenger.Infrastructure;
@@ -15,11 +16,13 @@ namespace Messenger.Application
         }
         
         
-        public override IChat CreateChat(ChatType chatType, List<User> firstChatUsers)
+        public override IChat CreateChat(ChatType chatType, List<User> firstChatUsers, String chatName)
         {
             if (firstChatUsers.Count == 2)
             {
-                IChat privateChat = new PrivateChat(firstChatUsers[0], firstChatUsers[1]);
+                IChat privateChat = new PrivateChat(firstChatUsers[0], 
+                    firstChatUsers[1],
+                    chatName);
                 
                 _chatRepository.AddChat(privateChat);
                 return privateChat;

@@ -1,12 +1,16 @@
-﻿namespace Messenger.Domain
+﻿using System;
+
+namespace Messenger.Domain
 {
     public class ChannelChat : Chat
     {
-        public User ChannelCreator { get; private set; }
+        public User ChannelCreator { get; }
+        public String ChatName { get; }
 
-        public ChannelChat(User chatCreator) : base(chatCreator)
+        public ChannelChat(User chatCreator, String chatName) : base(chatCreator, chatName)
         {
             ChannelCreator = chatCreator;
+            ChatName = chatName;
         }
 
         protected override bool MessageSendingPermission(User user)
