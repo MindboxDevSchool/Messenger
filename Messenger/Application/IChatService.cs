@@ -12,7 +12,7 @@ namespace Messenger.Application
     }
     public interface IChatService
     {
-        IChat CreateChat(ChatType chatType, List<User> firstChatUsers, String chatName);
+        IChat CreateChat(ChatType chatType, List<IUser> firstChatUsers, String chatName);
 
         void GetChat(Guid chatId);
         void DeleteChat(Guid chatId);

@@ -8,14 +8,14 @@ namespace Messenger.Application
     {
         private readonly IUserRepository _userRepository;
 
-        public User CreateUser(String login, String password)
+        public IUser CreateUser(String login, String password)
         {
-            User user = new User(login, password);
+            IUser user = new User(login, password);
             _userRepository.AddUser(user);
             return user;
         }
 
-        public void DeleteUser(User user)
+        public void DeleteUser(IUser user)
         {
             _userRepository.DeleteUser(user.UserId);
         }

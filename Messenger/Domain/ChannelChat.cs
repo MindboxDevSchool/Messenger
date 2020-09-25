@@ -4,31 +4,31 @@ namespace Messenger.Domain
 {
     public class ChannelChat : Chat
     {
-        public User ChannelCreator { get; }
+        public IUser ChannelCreator { get; }
         public String ChatName { get; }
 
-        public ChannelChat(User chatCreator, String chatName) : base(chatCreator, chatName)
+        public ChannelChat(IUser chatCreator, String chatName) : base(chatCreator, chatName)
         {
             ChannelCreator = chatCreator;
             ChatName = chatName;
         }
 
-        protected override bool MessageSendingPermission(User user)
+        protected override bool MessageSendingPermission(IUser user)
         {
             return user == ChannelCreator;
         }
 
-        protected override bool MessageDeletingPermission(User user)
+        protected override bool MessageDeletingPermission(IUser user)
         {
             return user == ChannelCreator;
         }
 
-        protected override bool MessageEditingPermission(User user, Message message)
+        protected override bool MessageEditingPermission(IUser user, IMessage message)
         {
             return user == ChannelCreator;
         }
 
-        public void AddUserToChannel(User user)
+        public void AddUserToChannel(IUser user)
         {
             _userRepository.AddUser(user);
         }

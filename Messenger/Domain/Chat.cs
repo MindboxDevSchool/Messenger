@@ -6,14 +6,14 @@ namespace Messenger.Domain
     public abstract class Chat : IChat
     {
         public Guid ChatId { get; }
-        public User ChatCreator { get; }
+        public IUser ChatCreator { get; }
         public DateTime CreatedDate { get; }
         public string ChatName { get; }
         
         protected readonly IMessageRepository _messageRepository;
         protected readonly IUserRepository _userRepository;
 
-        public Chat(User chatCreator, String chatName)
+        public Chat(IUser chatCreator, String chatName)
         {
             CreatedDate = DateTime.Now;
             ChatCreator = chatCreator;
@@ -24,31 +24,30 @@ namespace Messenger.Domain
             _userRepository.AddUser(chatCreator);
         }
 
-        protected abstract bool MessageSendingPermission(User user);
-        protected abstract bool MessageEditingPermission(User user, Message message);
-        protected abstract bool MessageDeletingPermission(User user);
+        protected abstract bool MessageSendingPermission(IUser user);
+        protected abstract bool MessageEditingPermission(IUser user, IMessage message);
+        protected abstract bool MessageDeletingPermission(IUser user);
 
-        public Guid SendMessage(User user, string messageText)
+        public Guid SendMessage(IUser user, string messageText)
         {
             if ((MessageSendingPermission(user))
                 && (_userRepository.GetUser(user.UserId) != null))
             {
-                Message newMessage = new Message(user, messageText);
-                _messageRepository.CreateMessage(newMessage);
+                
+                IMessage newMessage = _messageRepository.CreateMessage(user, messageText);
                 return newMessage.MessageId;
             }
-            else
-            {
-                return default(Guid);
-            }
+            throw new UnauthorizedAccessException(
+                "This user is not able to send the message to the chat!"
+                );
         }
 
-        public Message GetMessage(Guid messageId)
+        public IMessage GetMessage(Guid messageId)
         {
             return _messageRepository.GetMessage(messageId);
         }
 
-        public void EditMessage(User user, Message message, string newMessageText)
+        public void EditMessage(IUser user, IMessage message, string newMessageText)
         {
             if ((MessageEditingPermission(user, message))
                 && (_userRepository.GetUser(user.UserId) != null))
@@ -56,15 +55,21 @@ namespace Messenger.Domain
                 message.MessageText = newMessageText;
                 _messageRepository.UpdateEditedMessage(message.MessageId, message);
             }
+            throw new UnauthorizedAccessException(
+                "This user is not able to edit the message in the chat!"
+                );
         }
 
-        public void DeleteMessage(User user, Message message)
+        public void DeleteMessage(IUser user, IMessage message)
         {
             if ((MessageDeletingPermission(user))
                 && (_userRepository.GetUser(user.UserId) != null))
             {
                 _messageRepository.DeleteMessage(message.MessageId);
             }
+            throw new UnauthorizedAccessException(
+                "This user is not able to delete the message from the chat!"
+                );
         }
     }
 }

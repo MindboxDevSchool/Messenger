@@ -5,7 +5,7 @@ namespace Messenger.Infrastructure
 {
     public interface IUserRepository
     {
-        void AddUser(User user);
+        void AddUser(IUser user);
         void DeleteUser(Guid userId);
         IUser GetUser(Guid userId);
 

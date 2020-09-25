@@ -9,23 +9,17 @@ namespace Messenger.Domain
         public Guid MessageCreator { get; }
         public String MessageText { get; set; }
 
-        public bool MessageNotificationStatus { get; }
-
-        public string MessageNotification { get; }
-
-        public Message(User user, String messageText)
+        public Message(IUser user, String messageText)
         {
-            if (user == null)
+            if (Object.ReferenceEquals(user, null))
                 throw new ArgumentNullException("The user does not exist!");
-            if (messageText == "")
+            if (string.IsNullOrEmpty(messageText))
                 throw new ArgumentNullException("Empty messages are prohibited!");
             
             MessageId = Guid.NewGuid();
             CreatedDate = DateTime.Now;
             MessageCreator = user.UserId;
             MessageText = messageText;
-            MessageNotification = "The message was created!";
-            MessageNotificationStatus = true;
 
 
         }

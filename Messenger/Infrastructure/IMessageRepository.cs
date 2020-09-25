@@ -5,10 +5,10 @@ namespace Messenger.Infrastructure
 {
     public interface IMessageRepository
     {
-        void CreateMessage(Message message);
-        void UpdateEditedMessage(Guid messageId, Message newMessage);
+        IMessage CreateMessage(IUser user, String messageText);
+        void UpdateEditedMessage(Guid messageId, IMessage newMessage);
         void DeleteMessage(Guid messageId);
-        Message GetMessage(Guid messageId);
+        IMessage GetMessage(Guid messageId);
 
     }
 }

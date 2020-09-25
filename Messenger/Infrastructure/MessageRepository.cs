@@ -6,14 +6,16 @@ namespace Messenger.Infrastructure
 {
     public class MessageRepository : IMessageRepository
     {
-        private readonly Dictionary<Guid, Message> _messageDictionary = new Dictionary<Guid,Message>();
+        private readonly Dictionary<Guid, IMessage> _messageDictionary = new Dictionary<Guid,IMessage>();
 
-        public void CreateMessage(Message message)
+        public IMessage CreateMessage(IUser user, String messageText)
         {
+            IMessage message = new Message(user, messageText);
             _messageDictionary[message.MessageId] = message;
+            return message;
         }
 
-        public void UpdateEditedMessage(Guid messageId, Message newMessage)
+        public void UpdateEditedMessage(Guid messageId, IMessage newMessage)
         {
             _messageDictionary[messageId] = newMessage;
         }
@@ -23,7 +25,7 @@ namespace Messenger.Infrastructure
             _messageDictionary.Remove(messageId);
         }
 
-        public Message GetMessage(Guid messageId)
+        public IMessage GetMessage(Guid messageId)
         {
             if (_messageDictionary.ContainsKey(messageId))
                 return _messageDictionary[messageId];

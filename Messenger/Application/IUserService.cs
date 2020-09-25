@@ -5,8 +5,7 @@ namespace Messenger.Application
 {
     public interface IUserService
     {
-        // добавить пароль
-        User CreateUser(String login, String password);
-        void DeleteUser(User user);
+        IUser CreateUser(String login, String password);
+        void DeleteUser(IUser user);
     }
 }

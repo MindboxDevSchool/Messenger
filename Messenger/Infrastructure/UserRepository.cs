@@ -6,9 +6,9 @@ namespace Messenger.Infrastructure
 {
     public class UserRepository : IUserRepository
     {
-        private readonly Dictionary<Guid, User> _userDictionary = new Dictionary<Guid, User>();
+        private readonly Dictionary<Guid, IUser> _userDictionary = new Dictionary<Guid, IUser>();
 
-        public void AddUser(User user)
+        public void AddUser(IUser user)
         {
             _userDictionary[user.UserId] = user;
         }

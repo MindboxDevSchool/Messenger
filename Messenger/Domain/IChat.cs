@@ -5,15 +5,14 @@ namespace Messenger.Domain
     public interface IChat
     {
         Guid ChatId { get; }
-        User ChatCreator { get; }
+        IUser ChatCreator { get; }
         DateTime CreatedDate { get; }
         String ChatName { get; }
 
-        Guid SendMessage(User user, String messageText);
-        Message GetMessage(Guid messageId);
-        void EditMessage(User user, Message message, String newMessageText);
-        void DeleteMessage(User user, Message message);
-        // void ResendMessage(User startUser, User endUser, Message message, String comment);
+        Guid SendMessage(IUser user, String messageText);
+        IMessage GetMessage(Guid messageId);
+        void EditMessage(IUser user, IMessage message, String newMessageText);
+        void DeleteMessage(IUser user, IMessage message);
 
     }
 }

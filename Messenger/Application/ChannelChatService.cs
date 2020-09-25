@@ -16,7 +16,7 @@ namespace Messenger.Application
         }
         
         
-        public override IChat CreateChat(ChatType chatType, List<User> firstChatUsers, String chatName)
+        public override IChat CreateChat(ChatType chatType, List<IUser> firstChatUsers, String chatName)
         {
             if (firstChatUsers.Count == 1)
             {
