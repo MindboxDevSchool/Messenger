@@ -8,7 +8,9 @@ namespace Messenger.Domain
                            IMessageInGroupRepository messages, 
                            IUsersRepository users) : base(creator, messages, users)
         {
-            _memberRepository.CreateUser(user2);
+            user2.Groups.Add(Id);
+            _memberRepository.CreateOrUpdateUser(user2);
+            
         }
 
         protected override bool CanUserSendMessage(IUser user)

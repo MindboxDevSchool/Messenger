@@ -19,7 +19,8 @@ namespace Messenger.Domain
         
         public void AddNewMember(User user)
         {
-            _memberRepository.CreateUser(user);
+            user.Groups.Add(Id);
+            _memberRepository.CreateOrUpdateUser(user);
         }
         
         public void AddAdmin(User user)

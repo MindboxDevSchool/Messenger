@@ -11,9 +11,7 @@ namespace Messenger.Domain
             Data = data;
         }
         public Guid Id { get; }
-
         public UserData Data { get; set; }
-
-
+        public HashSet<Guid> Groups { get; } = new HashSet<Guid>();
     }
 }

@@ -5,7 +5,7 @@ namespace Messenger.Domain
 {
     public interface IUsersRepository
     {
-        public void CreateUser(IUser user);
+        public void CreateOrUpdateUser(IUser user);
         public IUser GetUser(Guid memberId);
         public void DeleteUser(Guid memberId);
     }

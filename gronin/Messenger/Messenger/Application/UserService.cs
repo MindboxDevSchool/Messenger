@@ -14,7 +14,7 @@ namespace Messenger.Application
         public IUser CreateUser(UserData data)
         {
             User user = new User(data);
-            _usersRepository.CreateUser(user);
+            _usersRepository.CreateOrUpdateUser(user);
             return user;
         }
 

@@ -17,12 +17,10 @@ namespace Messenger.Domain
                 CreatedBy = creator;
                 _messageRepository = messages;
                 _memberRepository = users;
-                _memberRepository.CreateUser(creator);
+                creator.Groups.Add(Id);
+                _memberRepository.CreateOrUpdateUser(creator);
             }
-            public void AddNewMember(User user)
-            {
-                _memberRepository.CreateUser(user);
-            }
+            
             protected abstract bool CanUserSendMessage(IUser user);
             protected abstract bool CanUserEditMessage(IUser user, IMessage message);
             protected abstract bool CanUserDeleteMessage(IUser user, IMessage message);

@@ -9,7 +9,7 @@ namespace Messenger.Application
         void CreateChat(string name, IUser user);
         void CreatePrivateChat(string name, IUser user,IUser user2);
         void CreateChannel(string name, IUser user);
-        void DeleteGroup(Guid chatId);
-        IGroup GetGroup(Guid chatId);
+        void DeleteGroup(Guid groupId);
+        IGroup GetGroup(Guid groupId);
     }
 }

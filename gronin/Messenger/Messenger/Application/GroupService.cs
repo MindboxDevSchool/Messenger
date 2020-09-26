@@ -38,14 +38,14 @@ namespace Messenger.Application
             var chat = new GroupChannel(user,_messageInGroupRepository,_usersRepository);
         }
 
-        public void DeleteGroup(Guid id)
+        public void DeleteGroup(Guid groupId)
         {
-            _groupRepository.DeleteGroup(id);
+            _groupRepository.DeleteGroup(groupId);
         }
 
-        public IGroup GetGroup(Guid chatId)
+        public IGroup GetGroup(Guid groupId)
         {
-            return _groupRepository.GetGroup(chatId);
+            return _groupRepository.GetGroup(groupId);
         }
     }
     

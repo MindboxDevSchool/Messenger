@@ -6,7 +6,7 @@ namespace Messenger
 {
     public class UserRepository:IUsersRepository
     {
-        public void CreateUser(IUser user)
+        public void CreateOrUpdateUser(IUser user)
         {
             _userDictionary[user.Id] = user;
         }

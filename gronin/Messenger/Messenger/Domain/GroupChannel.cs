@@ -17,7 +17,8 @@ namespace Messenger.Domain
         
         public void AddNewMember(User user)
         {
-            _memberRepository.CreateUser(user);
+            user.Groups.Add(Id);
+            _memberRepository.CreateOrUpdateUser(user);
         }
 
         protected override bool CanUserSendMessage(IUser user)

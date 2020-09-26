@@ -7,5 +7,7 @@ namespace Messenger.Domain
     {
         Guid Id { get; }
         public UserData Data { get; set; }
+
+        public HashSet<Guid> Groups { get; }
     }
 }
