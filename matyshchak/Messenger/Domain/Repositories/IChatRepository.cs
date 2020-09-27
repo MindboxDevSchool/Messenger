@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Chat;
+using Domain.Chats;
 
 namespace Domain.Repositories
 {

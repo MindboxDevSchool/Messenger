@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Message;
 using Domain.User;
 
 namespace Domain.Repositories

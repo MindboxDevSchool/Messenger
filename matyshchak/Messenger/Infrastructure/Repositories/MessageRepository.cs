@@ -1,8 +1,8 @@
 ﻿using System;
-using Domain;
+using Domain.Message;
 using Domain.Repositories;
 
-namespace Infrastructure
+namespace Infrastructure.Repositories
 {
     public class MessageRepository : IRepository<IMessage>
     {

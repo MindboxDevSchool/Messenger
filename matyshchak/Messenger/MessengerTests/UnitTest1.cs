@@ -15,8 +15,7 @@ namespace MessengerTests
         [Test]
         public void Test1()
         {
-            var compositionRoot = CompositionRoot.Create();
-            var user = compositionRoot.UserService.Register(new UserName(), new PhoneNumber());
+            
         }
     }
 }

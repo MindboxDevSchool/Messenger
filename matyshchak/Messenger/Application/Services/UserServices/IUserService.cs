@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using Domain.Chat;
 using Domain.User;
 
-namespace Application.Services
+namespace Application.Services.UserServices
 {
     public interface IUserService
     {

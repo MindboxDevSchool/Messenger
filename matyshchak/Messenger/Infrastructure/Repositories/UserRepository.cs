@@ -2,7 +2,7 @@
 using Domain.Repositories;
 using Domain.User;
 
-namespace Infrastructure
+namespace Infrastructure.Repositories
 {
     public class UserRepository : IRepository<IUser>
     {

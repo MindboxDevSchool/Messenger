@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Domain.Chat;
+﻿using System.Collections.Generic;
+using Domain.Chats;
 
 namespace Domain.User
 {
-    public interface IUser
+    public interface IUser : IEntity
     {
-        public Guid Id { get; }
         public UserName Name { get; }
         public PhoneNumber PhoneNumber { get; }
-        public IReadOnlyList<Guid> ChatsIds { get; }
+        public IEnumerable<IChat> Chats { get; }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using Application.Services;
+using Application.Services.UserServices;
 using Infrastructure;
+using Infrastructure.Repositories;
 
 namespace Usage
 {
     public class CompositionRoot
     {
-        public static CompositionRoot Create()
+        /*public static CompositionRoot Create()
         {
             var userRepository = new UserRepository();
             return new CompositionRoot()
@@ -15,7 +17,6 @@ namespace Usage
 
         }
         
-        
-        public IUserService UserService { get; private set; }
+        public IUserService UserService { get; private set; }*/
     }
 }

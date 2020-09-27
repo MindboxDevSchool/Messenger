@@ -1,8 +1,8 @@
 ﻿using System;
-using Domain.Chat;
+using Domain.Chats;
 using Domain.Repositories;
 
-namespace Infrastructure
+namespace Infrastructure.Repositories
 {
     public class ChatRepository : IRepository<IChat>
     {
