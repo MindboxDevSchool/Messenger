@@ -3,7 +3,7 @@ using Domain.Chats;
 using Domain.Repositories;
 using Domain.User;
 
-namespace Application.Services.ChatRoleService
+namespace Application.Services.GroupRoleService
 {
     public class GroupRoleService : IGroupRoleService
     {

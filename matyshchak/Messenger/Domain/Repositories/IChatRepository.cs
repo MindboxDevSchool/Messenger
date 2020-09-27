@@ -5,9 +5,9 @@ namespace Domain.Repositories
 {
     public interface IChatRepository
     {
-        IChat AddChat(IChat chat);
-        IChat GetChat(Guid id);
-        IChat UpdateChat(IChat chat);
-        IChat DeleteChat(Guid id);
+        public void AddChat(IChat chat);
+        public IChat GetChat(Guid id);
+        public void UpdateChat(IChat chat);
+        public void DeleteChat(Guid id);
     }
 }

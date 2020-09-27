@@ -16,12 +16,12 @@ namespace Application.Services.MessageServices
 
 
         public MessageService(IMessageRepository messageRepository,
-            IChatRepository chatRepository, IContext context, IUserRepository userRepository)
+            IChatRepository chatRepository, IUserRepository userRepository, IContext context)
         {
             _messageRepository = messageRepository;
             _chatRepository = chatRepository;
-            _context = context;
             _userRepository = userRepository;
+            _context = context;
         }
 
         public Guid AddMessage(Guid chatId, string content)

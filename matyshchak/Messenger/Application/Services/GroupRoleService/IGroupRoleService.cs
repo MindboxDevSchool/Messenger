@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Services.ChatRoleService
+namespace Application.Services.GroupRoleService
 {
     public interface IGroupRoleService
     {

@@ -7,7 +7,7 @@ namespace Domain.Chats
 {
     public class Group : IGroup
     {
-        public Group(Guid id, IEnumerable<IUser> members, IEnumerable<IMessage> messages, IEnumerable<IUser> admins)
+        public Group(Guid id, IEnumerable<IUser> members, IEnumerable<IUser> admins, IEnumerable<IMessage> messages)
         {
             Id = id;
             Members = members;
@@ -27,6 +27,15 @@ namespace Domain.Chats
         public void DemoteFromAdmin(IUser user)
         {
             throw new NotImplementedException();
+        }
+        
+        public static Group Create(Guid id, IUser owner)
+        {
+            return new Group(
+                id,
+                new List<IUser>(),
+                new List<IUser>(),
+                new List<IMessage>());
         }
     }
 }

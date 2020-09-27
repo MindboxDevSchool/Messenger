@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Domain.Chats;
 using Domain.Repositories;
 using Domain.User;
 
@@ -18,8 +16,7 @@ namespace Application.Services.UserServices
         public Guid Register(UserName userName, PhoneNumber phoneNumber)
         {
             var id = new Guid();
-            var chats = new List<IChat>();
-            var user = new User(id, userName, phoneNumber, chats);
+            var user = User.Create(id, userName, phoneNumber);
             _repository.AddUser(user);
             return id;
         }
