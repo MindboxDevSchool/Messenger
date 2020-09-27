@@ -22,21 +22,33 @@ namespace Messenger.Application
             return _messageRepository.CreateMessage(text, sender, receiver);
         }
 
-        public void EditMessage(String messageId, string newText)
+        public void EditMessage(String messageId, String editorId, string newText)
         {
+            if (!CanEditorAccessMessage(messageId, editorId))
+                throw new AccessErrorException();
+            if (newText == "")
+                throw new EmptyTextException();
             _messageRepository.EditMessage(messageId, newText);
         }
 
-        public void DeleteMessage(String messageId)
+        public void DeleteMessage(string messageId, string editorId)
         {
+            if (!CanEditorAccessMessage(messageId, editorId))
+                throw new AccessErrorException();
             _messageRepository.DeleteMessage(messageId);
         }
-
+        
         public IReadOnlyCollection<IMessage> GetAllMessages(string senderId, string receiverId)
         {
             var sender = _userRepository.GetUser(senderId);
             var receiver = _userRepository.GetUser(receiverId);
             return _messageRepository.GetMessages(sender, receiver);
+        }
+
+        public bool CanEditorAccessMessage(string messageId, string editorId)
+        {
+            var message = _messageRepository.GetMessage(messageId);
+            return message.Sender.Id == editorId;
         }
     }
 }

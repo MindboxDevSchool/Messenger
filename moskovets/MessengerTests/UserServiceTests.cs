@@ -49,5 +49,7 @@ namespace MessengerTests
             
             Assert.Throws<NotFoundException>(()=>_userService.EditLogin(id, newLogin));
         }
+        
+        
     }
 }
