@@ -48,7 +48,11 @@ namespace Messenger
 
         public IReadOnlyCollection<IMessage> GetMessages(IReceiver receiver)
         {
-            throw new NotImplementedException();
+            var messages = _messages
+                .Where(m => m.Receiver.Equals(receiver))
+                .OrderByDescending(m => m.SentAt).ToList();
+            
+            return messages;
         }
 
         public IMessage GetMessage(string id)

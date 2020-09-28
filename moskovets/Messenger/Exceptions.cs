@@ -6,6 +6,15 @@ namespace Messenger
     {
     }
 
+    public class MemberNotFoundException : NotFoundException
+    {
+        
+    }
+
+    public class RemovingCreatorException : Exception
+    {
+        
+    }
     public class EmptyTextException : Exception
     {
     }
@@ -13,4 +22,5 @@ namespace Messenger
     public class AccessErrorException : Exception
     {
     }
+    
 }
