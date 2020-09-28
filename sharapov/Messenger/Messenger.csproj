@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <AssemblyName>Messenger </AssemblyName>
-        <RootNamespace>Messenger </RootNamespace>
+        <AssemblyName>Messenger</AssemblyName>
+        <RootNamespace>Messenger</RootNamespace>
     </PropertyGroup>
 
 </Project>

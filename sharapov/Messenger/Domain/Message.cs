@@ -8,8 +8,7 @@ namespace Messenger.Domain
         public int MessageId { get; }
         public int MessageCreatorId { get; }
         public IReadOnlyCollection<int> ReceiversUserID { get; }
-
-
+        
         public string Text {
             set {
                 Text = value ?? throw new ArgumentNullException(nameof(value));
@@ -22,8 +21,7 @@ namespace Messenger.Domain
         public DateTime TimePost { get; }
 
         public Optional<DateTime> TimeLastModified { get; private set; }
-
-
+        
         public Message(string text, int messageId, int creatorId, IReadOnlyCollection<int> receiversUserId) {
             MessageId = messageId;
             MessageCreatorId = creatorId;

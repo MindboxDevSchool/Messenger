@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Week3\Week3.csproj" />
+      <ProjectReference Include="..\Messenger\Messenger.csproj" />
     </ItemGroup>
 
 </Project>

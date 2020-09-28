@@ -8,6 +8,5 @@ namespace Messenger.Domain
         OperationStatus DeleteMessage(int messageId, int userId, int roomId);
         OperationStatus DeleteMessageNoUserIdCheck(int messageId, int roomId);
         OperationStatus EditMessage(int messageId, string textMessage, int userId, int roomId);
-        public IReadOnlyCollection<Message> PullMessageForClient(int roomId, int lastNumMessages);
     }
 }

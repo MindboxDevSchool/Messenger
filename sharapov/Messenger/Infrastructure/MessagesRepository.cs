@@ -46,6 +46,7 @@ namespace Messenger.Infrastructure
             return OperationStatus.Success;
         }
 
+        //bad traverse `
         public OperationStatus EditMessage(int messageId, string textMessage, int userId, int roomId)
         {
             try
@@ -71,18 +72,17 @@ namespace Messenger.Infrastructure
         }
 
 
-        //use pull from this point 
-        public IReadOnlyCollection<Message> PullMessageForClient(int roomId, int lastNumMessages)
-        {
-            var pullMessages = new ReadOnlyCollection<Message>(GetLastNumMessages(roomId, lastNumMessages));
-            return pullMessages;
-        }
-
         private List<Message> GetLastNumMessages(int roomId, int lastNumMessages)
         {
             return _messages[roomId]
                 .Skip(Math.Max(0, _messages.Count - lastNumMessages))
                 .ToList();
+        }
+
+        public IReadOnlyCollection<Message> PullMessageForClient(int roomId, int lastNumMessages)
+        {
+            var pullMessages = new ReadOnlyCollection<Message>(GetLastNumMessages(roomId, lastNumMessages));
+            return pullMessages;
         }
     }
 }

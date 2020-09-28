@@ -6,7 +6,6 @@ namespace Usage
     {
         public MessagesRepository Create()
         {
-            
             return new MessagesRepository();
         }
     }
