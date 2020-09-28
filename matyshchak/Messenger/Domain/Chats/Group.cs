@@ -29,7 +29,7 @@ namespace Domain.Chats
             throw new NotImplementedException();
         }
         
-        public static Group Create(Guid id, IUser owner)
+        public static Group Create(Guid id)
         {
             return new Group(
                 id,

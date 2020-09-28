@@ -5,13 +5,13 @@ using Domain.User;
 
 namespace Application.Services.GroupRoleService
 {
-    public class GroupRoleService : IGroupRoleService
+    public class RoleService : IRoleService
     {
         private readonly IUserRepository _userRepository;
         private readonly IChatRepository _chatRepository;
         private readonly IContext _context;
 
-        public GroupRoleService(IUserRepository userRepository, IChatRepository chatRepository, IContext context)
+        public RoleService(IUserRepository userRepository, IChatRepository chatRepository, IContext context)
         {
             _userRepository = userRepository;
             _chatRepository = chatRepository;

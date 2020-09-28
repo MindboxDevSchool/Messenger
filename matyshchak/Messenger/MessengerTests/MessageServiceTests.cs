@@ -29,7 +29,11 @@ namespace MessengerTests
         [Test]
         public void Test1()
         {
-            
+            var userId = new Guid();
+            var user = User.Create(userId, new UserName("Stepa"), new PhoneNumber("123"));
+
+            var chatId = new Guid();
+            var group = Group.Create(chatId);
         }
     }
 }
