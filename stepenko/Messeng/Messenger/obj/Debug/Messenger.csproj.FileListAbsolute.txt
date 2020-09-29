@@ -1,0 +1,6 @@
+C:\Users\Злата\RiderProjects\Messenger\Messenger\bin\Debug\Messenger.dll
+C:\Users\Злата\RiderProjects\Messenger\Messenger\bin\Debug\Messenger.pdb
+C:\Users\Злата\RiderProjects\Messenger\Messenger\obj\Debug\Messenger.csprojAssemblyReference.cache
+C:\Users\Злата\RiderProjects\Messenger\Messenger\obj\Debug\Messenger.csproj.CoreCompileInputs.cache
+C:\Users\Злата\RiderProjects\Messenger\Messenger\obj\Debug\Messenger.dll
+C:\Users\Злата\RiderProjects\Messenger\Messenger\obj\Debug\Messenger.pdb
