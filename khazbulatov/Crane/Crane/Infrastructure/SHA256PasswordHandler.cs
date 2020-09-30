@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Crane.Domain;
 
-namespace Crane
+namespace Crane.Infrastructure
 {
     public class SHA256PasswordHandler : IPasswordHandler
     {

@@ -4,9 +4,14 @@ namespace Crane.Application
 {
     public class MessageService
     {
-        public IMessage TrySendMessage(ISender from, IChat to, string body)
+        public bool TrySendMessage(IUser user, IChat chat, string body)
         {
-            return null;
+            return chat.TrySendMessage(user, body);
+        }
+        
+        public bool TryEditMessage(IUser user, IChat chat, IMessage message, string body)
+        {
+            return chat.TryEditMessage(user, message, body);
         }
     }
 }

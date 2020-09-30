@@ -8,7 +8,8 @@ namespace Crane.Domain
         IEnumerable<IMember> Members { get; }
         IEnumerable<IRole> Roles { get; }
         string Name { get; }
-
-        bool TrySendMessage(IMessage message);
+        
+        bool TrySendMessage(IUser user, string body);
+        bool TryEditMessage(IUser user, IMessage message, string body);
     }
 }

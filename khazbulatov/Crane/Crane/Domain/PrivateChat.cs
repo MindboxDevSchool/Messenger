@@ -4,18 +4,23 @@ namespace Crane.Domain
 {
     public class PrivateChat : Chat
     {
-        private const int PeerIndex = 1;
-        private const int MemberCount = 2;
-        
-        private readonly IMember[] _members = new IMember[MemberCount];
-        private readonly IRole[] _roles = new IRole[] 
-        {
-            Role.Nobody,
-            Role.Participant
-        };
+        private readonly IMember _peer;
 
-        public override IEnumerable<IMember> Members => _members;
-        public override IEnumerable<IRole> Roles => _roles;
-        public override string Name => _members[PeerIndex].User.Name;
+        public override IEnumerable<IMember> Members { get; }
+        public override IEnumerable<IRole> Roles { get; }
+        public override string Name => _peer.User.Name;
+
+        public PrivateChat(int id, IIdentityProvider idProvider,
+            IRepo<IMessage> messageRepo, IMember self, IMember peer)
+            : base(id, idProvider, messageRepo)
+        {
+            _peer = peer;
+            Members = new IMember[] {self, _peer};
+            Roles = new IRole[] 
+            {
+                Role.Nobody,
+                Role.Participant
+            };
+        }
     }
 }
