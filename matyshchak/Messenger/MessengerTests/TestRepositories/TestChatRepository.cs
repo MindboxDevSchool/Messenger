@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Domain.Chats;
-using Domain.Repositories;
+using Domain.Repository;
 
 namespace MessengerTests.TestRepositories
 {
-    public class TestChatRepository : IChatRepository
+    public class TestChatRepository : IRepository<IChat>
     {
         public TestChatRepository(IDictionary<Guid, IChat> chats) => Chats = chats;
 
         private IDictionary<Guid, IChat> Chats { get; }
 
-        public void AddChat(IChat chat) => Chats[chat.Id] = chat;
+        public void Add(IChat item) => Chats.Add(item.Id, item);
+        
+        public IChat Find(Guid id) => Chats[id];
 
-        public IChat GetChat(Guid id) => Chats[id];
-
-        public void UpdateChat(IChat chat)
+        public void Update(IChat chat)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteChat(Guid id)
+        public void Delete(Guid id)
         {
             throw new NotImplementedException();
         }

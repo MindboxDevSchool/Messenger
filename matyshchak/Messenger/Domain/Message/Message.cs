@@ -1,28 +1,33 @@
 ﻿using System;
 using Domain.Chats;
+using Domain.User;
 
 namespace Domain.Message
 {
     public class Message : IMessage
     {
-        public Message(Guid id, Guid authorId, IChat chat, DateTime timePosted, MessageContent content)
+        public static IMessage Create(Guid id, IUser author, IChat chat, MessageContent content)
+        {
+            return new Message(id, author, chat, content, DateTime.Now);
+        }
+        
+        private Message(Guid id, IUser author, IChat chat, MessageContent content, DateTime timePosted)
         {
             Id = id;
-            AuthorId = authorId;
+            Author = author;
             Chat = chat;
-            TimePosted = timePosted;
             Content = content;
+            TimePosted = timePosted;
         }
-
-        public Guid Id { get; }
-        public Guid AuthorId { get; }
-        public IChat Chat { get; }
-        public DateTime TimePosted { get; }
-        public MessageContent Content { get; }
         
+        public Guid Id { get; }
+        public IUser Author { get; }
+        public IChat Chat { get; }
+        public MessageContent Content { get; }
+        public DateTime TimePosted { get; }
         public IMessage Edit(MessageContent newContent)
         {
-            return new Message(Id, AuthorId, Chat, TimePosted, newContent);
+            throw new NotImplementedException();
         }
     }
 }

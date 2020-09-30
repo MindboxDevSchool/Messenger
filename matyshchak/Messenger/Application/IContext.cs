@@ -4,6 +4,6 @@ namespace Application
 {
     public interface IContext
     {
-        Guid GetCurrentUserId();
+        Guid CurrentUserId { get; }
     }
 }

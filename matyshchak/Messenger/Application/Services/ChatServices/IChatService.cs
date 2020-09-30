@@ -1,12 +1,13 @@
-﻿using System;
+﻿﻿using System;
+ using Domain.Chats;
 
-namespace Application.Services.ChatServices
+ namespace Application.Services.ChatServices
 {
     public interface IChatService
     {
-        public Guid CreateChannel(Guid ownerId, string channelName, string description);
-        public Guid CreateGroup(string groupName);
-        public Guid CreatePrivateChat(Guid firstMemberId, Guid secondMemberId);
+        public Guid CreateChannel(ChatName channelName, ChatDescription description);
+        public Guid CreateGroup(ChatName groupName, ChatDescription description);
+        public Guid CreatePrivateChat(Guid otherUserId);
         public void DeleteChat(Guid chatId);
     }
 }

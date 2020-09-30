@@ -1,8 +1,8 @@
-﻿namespace Domain.User
+﻿namespace Domain.Chats
 {
-    public class UserName
+    public class ChatName
     {
-        public UserName(string text)
+        public ChatName(string text)
         {
             Text = text;
         }

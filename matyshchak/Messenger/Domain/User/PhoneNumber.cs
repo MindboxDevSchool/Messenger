@@ -2,11 +2,11 @@
 {
     public class PhoneNumber
     {
-        public PhoneNumber(string value)
+        public PhoneNumber(string text)
         {
-            Value = value;
+            Text = text;
         }
 
-        public string Value { get; }
+        public string Text { get; }
     }
 }

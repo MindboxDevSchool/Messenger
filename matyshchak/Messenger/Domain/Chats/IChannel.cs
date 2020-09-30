@@ -1,9 +1,8 @@
-﻿using Domain.User;
+﻿using System.Collections.Generic;
 
 namespace Domain.Chats
 {
-    public interface IChannel : IChat
+    public interface IChannel : IChat, IHasOwner, IHasDescription, IHasName
     {
-        public IUser Owner { get; }
     }
 }

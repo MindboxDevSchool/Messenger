@@ -1,14 +1,14 @@
 ﻿using System;
-using Domain.Repositories;
+using Domain.Repository;
 using Domain.User;
 
 namespace Application.Services.UserServices
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _repository;
+        private readonly IRepository<IUser> _repository;
 
-        public UserService(IUserRepository repository)
+        public UserService(IRepository<IUser> repository)
         {
             _repository = repository;
         }
@@ -17,13 +17,13 @@ namespace Application.Services.UserServices
         {
             var id = new Guid();
             var user = User.Create(id, userName, phoneNumber);
-            _repository.AddUser(user);
+            _repository.Add(user);
             return id;
         }
 
         public IUser GetUser(Guid id)
         {
-            return _repository.GetUser(id);
+            return _repository.Find(id);
         }
     }
 }

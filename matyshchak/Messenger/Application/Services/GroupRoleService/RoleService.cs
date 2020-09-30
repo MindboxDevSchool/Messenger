@@ -1,40 +1,58 @@
 ﻿using System;
+using Application.Services.MessageServices;
 using Domain.Chats;
-using Domain.Repositories;
+using Domain.Repository;
 using Domain.User;
+using Domain.UserPermissions;
+using Domain.UserPermissions.Exeptions;
 
 namespace Application.Services.GroupRoleService
 {
     public class RoleService : IRoleService
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IChatRepository _chatRepository;
+        private readonly IRepository<IGroup> _groupRepository;
+        private readonly IRepository<IUser> _userRepository;
         private readonly IContext _context;
 
-        public RoleService(IUserRepository userRepository, IChatRepository chatRepository, IContext context)
+        public RoleService(IRepository<IGroup> groupRepository, IRepository<IUser> userRepository, IContext context)
         {
+            _groupRepository = groupRepository;
             _userRepository = userRepository;
-            _chatRepository = chatRepository;
             _context = context;
         }
-
-        public void MakeUserGroupAdmin(Guid userId, Guid chatId)
+        
+        public void PromoteToAdmin(Guid userToPromoteId, Guid groupId)
         {
-            var currentUser = _userRepository.GetUser(_context.GetCurrentUserId());
-            var chat = _chatRepository.GetChat(chatId);
-
-            if (!(chat is IGroup group))
-                throw new Exception();
+            var currentUser = _userRepository.Find(_context.CurrentUserId);
+            var userToPromote = _userRepository.Find(userToPromoteId);
+            var group = _groupRepository.Find(groupId);
             
-            if (!currentUser.IsGroupAdmin(group))
-                throw new Exception();
+            if (!currentUser.IsMemberOf(group) || !userToPromote.IsMemberOf(group))
+                throw new NotMemberOfChatException();
+            
+            if (!currentUser.IsOwnerOf(group))
+                throw new NoPermissionToChangeAdminsException();
 
-            group.PromoteToAdmin(currentUser);
+            group.Admins.Add(userToPromote);
         }
 
-        public void MakeUserRegularGroupMember(Guid userId, Guid chatId)
+        public void DemoteFromAdmin(Guid userToDemoteId, Guid groupId)
         {
-            throw new NotImplementedException();
+            var currentUser = _userRepository.Find(_context.CurrentUserId);
+            var userToDemote = _userRepository.Find(userToDemoteId);
+            var group = _groupRepository.Find(groupId);
+            
+            if (!currentUser.IsMemberOf(group) || !userToDemote.IsMemberOf(group))
+                throw new NotMemberOfChatException();
+            
+            if (!currentUser.IsOwnerOf(group))
+                throw new NoPermissionToChangeAdminsException();
+
+            group.Admins.Add(userToDemote);
         }
+    }
+
+    public class NoPermissionToChangeAdminsException : Exception
+    {
     }
 }

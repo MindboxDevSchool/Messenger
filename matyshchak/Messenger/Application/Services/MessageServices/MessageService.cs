@@ -1,94 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Domain.Chats;
 using Domain.Message;
-using Domain.Repositories;
-using static Domain.User.UserPermissionExtensions;
+using Domain.Repository;
+using Domain.User;
+using Domain.UserPermissions;
+using Domain.UserPermissions.Exeptions;
 
 namespace Application.Services.MessageServices
 {
     public class MessageService : IMessageService
     {
-        private readonly IMessageRepository _messageRepository;
-        private readonly IChatRepository _chatRepository;
-        private readonly IContext _context;
-        private readonly IUserRepository _userRepository;
-
-
-        public MessageService(IMessageRepository messageRepository,
-            IChatRepository chatRepository, IUserRepository userRepository, IContext context)
+        public MessageService(
+            IContext context,
+            IRepository<IChat> chatRepository,
+            IRepository<IUser> userRepository,
+            IRepository<IMessage> messageRepository)
         {
-            _messageRepository = messageRepository;
+            _context = context;
             _chatRepository = chatRepository;
             _userRepository = userRepository;
-            _context = context;
+            _messageRepository = messageRepository;
         }
 
-        public Guid AddMessage(Guid chatId, string content)
+        private readonly IContext _context;
+
+        private readonly IRepository<IChat> _chatRepository;
+
+        private readonly IRepository<IUser> _userRepository;
+
+        private readonly IRepository<IMessage> _messageRepository;
+
+        public Guid Post(Guid chatId, MessageContent messageContent)
         {
-            var currentUserId = _context.GetCurrentUserId();
-            var currentUser = _userRepository.GetUser(currentUserId);
-            var chat = _chatRepository.GetChat(chatId);
-            if (!currentUser.HasPermissionToPostMessage(chat))
-                throw new Exception();
+            var currentUser = _userRepository.Find(_context.CurrentUserId);
+            var chat = _chatRepository.Find(chatId);
+            
+            if (!currentUser.IsMemberOf(chat))
+                throw new NotMemberOfChatException();
+            
+            if (!currentUser.HasPermissionToPostTo(chat))
+                throw new NoPermissionToPostMessageException();
             
             var messageId = new Guid();
-            var messageContent = new MessageContent(content);
-            var message = new Message(messageId, currentUserId, chat, DateTime.Now, messageContent);
-
-            _messageRepository.AddMessage(message);
+            var message = Message.Create(messageId, currentUser, chat, messageContent);
+            _messageRepository.Add(message);
+            
             return messageId;
         }
 
-        public IMessage GetMessage(Guid messageId)
+        public IEnumerable<IMessage> Read(Guid chatId)
         {
-            var currentUserId = _context.GetCurrentUserId();
-            var currentUser = _userRepository.GetUser(currentUserId);
-            var message = _messageRepository.GetMessage(messageId);
+            var currentUser = _userRepository.Find(_context.CurrentUserId);
+            var chat = _chatRepository.Find(chatId);
             
-            if (!currentUser.HasPermissionToReadFromChat(message.Chat))
-                throw new Exception();
-
-            return message;
+            if (!currentUser.IsMemberOf(chat))
+                throw new NotMemberOfChatException();
+            
+            return chat.Messages;
         }
 
-        public IReadOnlyList<IMessage> GetLastMessages(Guid chatId, int numberOfMessages)
+        public void Edit(Guid messageId, MessageContent newContent)
         {
-            var currentUserId = _context.GetCurrentUserId();
-            var currentUser = _userRepository.GetUser(currentUserId);
-            var chat = _chatRepository.GetChat(chatId);
+            var currentUser = _userRepository.Find(_context.CurrentUserId);
+            var message = _messageRepository.Find(messageId);
             
-            if (!currentUser.HasPermissionToReadFromChat(chat))
-                throw new Exception();
+            if (!currentUser.HasPermissionToEdit(message))
+                throw new NoPermissionToEditMessageException();
 
-            return chat.Messages
-                .Take(numberOfMessages)
-                .ToList();
+            var newMessage = message.Edit(newContent);
+            _messageRepository.Update(newMessage);
         }
 
-        public void EditMessage(Guid messageId, string newContent)
+        public void Delete(Guid messageId)
         {
-            var currentUserId = _context.GetCurrentUserId();
-            var currentUser = _userRepository.GetUser(currentUserId);
-            var messageToEdit = _messageRepository.GetMessage(messageId);
-            
-            if (!currentUser.HasPermissionToEditMessage(messageToEdit))
-                throw new Exception();
+            var currentUser = _userRepository.Find(_context.CurrentUserId);
+            var message = _messageRepository.Find(messageId);
 
-            var newMessage = messageToEdit.Edit(new MessageContent(newContent));
-            _messageRepository.AddMessage(newMessage);
-        }
+            if (!currentUser.HasPermissionToDeleteMessage(message))
+                throw new NoPermissionToDeleteMessageException();
 
-        public void DeleteMessage(Guid messageId)
-        {
-            var currentUserId = _context.GetCurrentUserId();
-            var currentUser = _userRepository.GetUser(currentUserId);
-            var messageToDelete = _messageRepository.GetMessage(messageId);
-            
-            if (!currentUser.HasPermissionToDeleteMessage(messageToDelete))
-                throw new Exception();
-
-            _messageRepository.DeleteMessage(messageToDelete.Id);
+            _messageRepository.Delete(messageId);
         }
     }
 }

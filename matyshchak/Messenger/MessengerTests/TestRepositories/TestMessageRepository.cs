@@ -1,23 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Chats;
 using Domain.Message;
-using Domain.Repositories;
+using Domain.Repository;
 
 namespace MessengerTests.TestRepositories
 {
-    public class TestMessageRepository : IMessageRepository
+    public class TestMessageRepository : IRepository<IMessage>
     {
-        public TestMessageRepository(Dictionary<Guid, IMessage> messages) => Messages = messages;
+        public TestMessageRepository(Dictionary<Guid, IMessage> messages)
+            => Messages = messages;
 
         private Dictionary<Guid, IMessage> Messages { get; }
         
-        public void AddMessage(IMessage message) => Messages.Add(message.Id, message);
+        public void Add(IMessage message)
+            => Messages.Add(message.Id, message);
 
-        public IMessage GetMessage(Guid id) => Messages[id];
+        public IMessage Find(Guid id)
+            => Messages[id];
 
-        public void UpdateMessage(IMessage message) => Messages[message.Id] = message;
+        public void Update(IMessage message)
+            => Messages[message.Id] = message;
 
-        public void DeleteMessage(Guid id)
+        public void Delete(Guid id)
         {
             throw new NotImplementedException();
         }

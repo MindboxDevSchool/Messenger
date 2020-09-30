@@ -7,35 +7,36 @@ namespace Domain.Chats
 {
     public class Group : IGroup
     {
-        public Group(Guid id, IEnumerable<IUser> members, IEnumerable<IUser> admins, IEnumerable<IMessage> messages)
+        private Group(Guid id,
+            IUser owner,
+            ChatName name,
+            ChatDescription description,
+            IReadOnlyCollection<IUser> members,
+            IReadOnlyCollection<IMessage> messages,
+            IList<IUser> admins)
         {
             Id = id;
+            Owner = owner;
+            Name = name;
+            Description = description;
             Members = members;
             Messages = messages;
             Admins = admins;
         }
-
-        public Guid Id { get; }
-        public IEnumerable<IUser> Members { get; }
-        public IEnumerable<IMessage> Messages { get; }
-        public IEnumerable<IUser> Admins { get; }
-        public void PromoteToAdmin(IUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DemoteFromAdmin(IUser user)
-        {
-            throw new NotImplementedException();
-        }
         
-        public static Group Create(Guid id)
-        {
-            return new Group(
-                id,
-                new List<IUser>(),
-                new List<IUser>(),
-                new List<IMessage>());
-        }
+        public Guid Id { get; }
+        public IUser Owner { get; }
+        public ChatName Name { get; }
+        public ChatDescription Description { get; }
+        public IList<IUser> Admins { get; }
+        public IReadOnlyCollection<IUser> Members { get; }
+        public IReadOnlyCollection<IMessage> Messages { get; }
+
+        public static Group Create(Guid id,
+            IUser owner,
+            ChatName name,
+            ChatDescription description,
+            IReadOnlyCollection<IUser> members) =>
+            new Group(id, owner, name, description, members, new List<IMessage>(), new List<IUser>());
     }
 }
