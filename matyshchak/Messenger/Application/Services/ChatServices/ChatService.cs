@@ -26,7 +26,7 @@ namespace Application.Services.ChatServices
         {
             var user = _userRepository.Find(_context.CurrentUserId);
             var subscribers = new List<IUser> {user};
-            var channelId = new Guid();
+            var channelId = Guid.NewGuid();
             var channel = Channel.Create(channelId, user, channelName, description, subscribers);
             _chatRepository.Add(channel);
             
@@ -36,7 +36,7 @@ namespace Application.Services.ChatServices
         public Guid CreateGroup(ChatName groupName, ChatDescription description)
         {
             var user = _userRepository.Find(_context.CurrentUserId);
-            var groupId = new Guid();
+            var groupId = Guid.NewGuid();
             var groupMembers = new List<IUser> {user};
             var group = Group.Create(groupId, user, groupName, description, groupMembers);
             _chatRepository.Add(group);
@@ -48,7 +48,7 @@ namespace Application.Services.ChatServices
         {
             var user = _userRepository.Find(_context.CurrentUserId);
             var otherUser = _userRepository.Find(otherUserId);
-            var chatId = new Guid();
+            var chatId = Guid.NewGuid();
             var chatMembers = new List<IUser> {user, otherUser};
             var privateChat = PrivateChat.Create(chatId, chatMembers);
             _chatRepository.Add(privateChat);

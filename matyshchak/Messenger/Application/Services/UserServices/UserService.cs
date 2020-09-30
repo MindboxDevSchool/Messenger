@@ -13,7 +13,7 @@ namespace Application.Services.UserServices
 
         public Guid Register(UserName userName, PhoneNumber phoneNumber)
         {
-            var id = new Guid();
+            var id = Guid.NewGuid();
             var user = User.Create(id, userName, phoneNumber);
             _repository.Add(user);
             return id;

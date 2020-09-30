@@ -42,7 +42,7 @@ namespace Application.Services.MessageServices
             if (!currentUser.HasPermissionToPostTo(chat))
                 throw new NoPermissionToPostMessageException();
             
-            var messageId = new Guid();
+            var messageId = Guid.NewGuid();
             var message = Message.Create(messageId, currentUser, chat, messageContent);
             _messageRepository.Add(message);
             
