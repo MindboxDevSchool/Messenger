@@ -51,8 +51,4 @@ namespace Application.Services.GroupRoleService
             group.Admins.Add(userToDemote);
         }
     }
-
-    public class NoPermissionToChangeAdminsException : Exception
-    {
-    }
 }

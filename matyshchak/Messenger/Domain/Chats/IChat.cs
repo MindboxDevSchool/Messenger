@@ -4,11 +4,6 @@ using Domain.User;
 
 namespace Domain.Chats
 {
-    public interface IHasName
-    {
-        ChatName Name { get; }
-    }
-
     public interface IChat : IEntity
     {
         public IReadOnlyCollection<IUser> Members { get; }
