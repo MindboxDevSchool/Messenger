@@ -20,8 +20,8 @@ namespace Domain.Chats
         public IReadOnlyCollection<IUser> Members { get; }
         public IReadOnlyCollection<IMessage> Messages { get; }
 
-        public static PrivateChat Create(Guid id,
+        public static PrivateChat Create(Guid chatId,
             IReadOnlyCollection<IUser> members) =>
-            new PrivateChat(id, members, new List<IMessage>());
+            new PrivateChat(chatId, members, new List<IMessage>());
     }
 }

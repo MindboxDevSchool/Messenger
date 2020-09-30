@@ -21,17 +21,23 @@ namespace Domain.Chats
             Description = description;
             Members = members;
             Messages = messages;
-            Admins = admins;
+            _admins = admins;
         }
         
         public Guid Id { get; }
         public IUser Owner { get; }
         public ChatName Name { get; }
         public ChatDescription Description { get; }
-        public IList<IUser> Admins { get; }
+        private readonly IList<IUser> _admins;
+        public IReadOnlyList<IUser> Admins => (IReadOnlyList<IUser>) _admins;
+
         public IReadOnlyCollection<IUser> Members { get; }
+
         public IReadOnlyCollection<IMessage> Messages { get; }
 
+        public void AddAdmin(IUser user) => _admins.Add(user);
+
+        public void RemoveAdmin(IUser admin) => _admins.Remove(admin);
         public static Group Create(Guid id,
             IUser owner,
             ChatName name,

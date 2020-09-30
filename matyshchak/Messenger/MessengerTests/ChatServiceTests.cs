@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Application;
 using Application.Services.ChatServices;
-using Application.Services.MessageServices;
 using Application.Services.UserServices;
 using Domain.Chats;
 using Domain.Repository;
 using Domain.User;
-using FluentAssertions;
 using MessengerTests.TestRepositories;
 using NUnit.Framework;
 
@@ -50,6 +48,21 @@ namespace MessengerTests
 
             var createdChatId = _chatService.CreatePrivateChat(otherUserId);
             var createdChat = _chatRepository.Find(createdChatId);
+
+            Assert.That(expectedChatMembers, Is.EquivalentTo(createdChat.Members.ToList()));
+        }
+        
+        [Test]
+        public void Private_chat_deletion_test()
+        {
+            // create other user
+            var otherUserId = Guid.NewGuid();
+            var otherUser = User.Create(otherUserId, new UserName("S2"), new PhoneNumber("2"));
+            _userRepository.Add(otherUser);
+            var expectedChatMembers = new List<IUser> {_currentUser, otherUser};
+
+            var createdChatId = _chatService.CreatePrivateChat(otherUserId);
+            var createdChat = (IPrivateChat)_chatRepository.Find(createdChatId);
 
             Assert.That(expectedChatMembers, Is.EquivalentTo(createdChat.Members.ToList()));
         }

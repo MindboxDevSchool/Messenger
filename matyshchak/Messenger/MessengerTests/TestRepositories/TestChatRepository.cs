@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Domain.Chats;
 using Domain.Repository;
+using Domain.User;
 
 namespace MessengerTests.TestRepositories
 {
@@ -11,8 +12,11 @@ namespace MessengerTests.TestRepositories
 
         private IDictionary<Guid, IChat> Chats { get; }
 
-        public void Add(IChat item) => Chats.Add(item.Id, item);
-        
+        public void Add(IChat item)
+        {
+            Chats.Add(item.Id, item);
+        }
+
         public IChat Find(Guid id) => Chats[id];
 
         public void Update(IChat chat)

@@ -1,5 +1,4 @@
 ﻿using System;
-using Application.Services.MessageServices;
 using Domain.Chats;
 using Domain.Repository;
 using Domain.User;
@@ -33,7 +32,7 @@ namespace Application.Services.GroupRoleService
             if (!currentUser.IsOwnerOf(group))
                 throw new NoPermissionToChangeAdminsException();
 
-            group.Admins.Add(userToPromote);
+            group.AddAdmin(userToPromote);
         }
 
         public void DemoteFromAdmin(Guid userToDemoteId, Guid groupId)
@@ -48,7 +47,7 @@ namespace Application.Services.GroupRoleService
             if (!currentUser.IsOwnerOf(group))
                 throw new NoPermissionToChangeAdminsException();
 
-            group.Admins.Add(userToDemote);
+            group.RemoveAdmin(userToDemote);
         }
     }
 }
