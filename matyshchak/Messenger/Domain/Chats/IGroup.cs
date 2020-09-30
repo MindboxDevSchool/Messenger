@@ -3,10 +3,8 @@ using Domain.User;
 
 namespace Domain.Chats
 {
-    public interface IGroup : IChat
+    public interface IGroup : IChat, IHasOwner, IHasAdmins, IHasDescription, IHasName
     {
-        public IEnumerable<IUser> Admins { get; }
-        public void PromoteToAdmin(IUser user);
-        public void DemoteFromAdmin(IUser user);
+        
     }
 }
