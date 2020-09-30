@@ -10,8 +10,7 @@ namespace MessengerTests.TestRepositories
         public TestUserRepository(Dictionary<Guid, IUser> users) => Users = users;
         private Dictionary<Guid, IUser> Users { get; }
         public void Add(IUser user) => Users[user.Id] = user;
-        public void Update(IUser item)
-            => Users[item.Id] = item;
+        public void Update(IUser item) => Users[item.Id] = item;
         public void Delete(Guid id)
         {
             throw new NotImplementedException();

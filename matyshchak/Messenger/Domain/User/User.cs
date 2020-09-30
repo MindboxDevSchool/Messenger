@@ -19,10 +19,7 @@ namespace Domain.User
         public PhoneNumber PhoneNumber { get; }
         public IEnumerable<IChat> Chats { get; }
 
-        public static User Create(Guid id, UserName name, PhoneNumber phoneNumber)
-        {
-            return new User(id, name, phoneNumber, new List<IChat>());
-        }
-
+        public static User Create(Guid id, UserName name, PhoneNumber phoneNumber) => 
+            new User(id, name, phoneNumber, new List<IChat>());
     }
 }

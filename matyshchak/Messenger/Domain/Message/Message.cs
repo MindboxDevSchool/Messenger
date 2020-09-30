@@ -6,11 +6,9 @@ namespace Domain.Message
 {
     public class Message : IMessage
     {
-        public static IMessage Create(Guid id, IUser author, IChat chat, MessageContent content)
-        {
-            return new Message(id, author, chat, content, DateTime.Now);
-        }
-        
+        public static IMessage Create(Guid id, IUser author, IChat chat, MessageContent content) => 
+            new Message(id, author, chat, content, DateTime.Now);
+
         private Message(Guid id, IUser author, IChat chat, MessageContent content, DateTime timePosted)
         {
             Id = id;

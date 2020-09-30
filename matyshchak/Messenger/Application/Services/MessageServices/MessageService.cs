@@ -5,7 +5,7 @@ using Domain.Message;
 using Domain.Repository;
 using Domain.User;
 using Domain.UserPermissions;
-using Domain.UserPermissions.Exeptions;
+using Domain.UserPermissions.Exceptions;
 
 namespace Application.Services.MessageServices
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.UserPermissions.Exeptions
+namespace Domain.UserPermissions.Exceptions
 {
     public class NoPermissionToEditMessageException : Exception
     {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Domain.Chats;
 using Domain.Repository;
 using Domain.User;
+using Domain.UserPermissions;
+using Domain.UserPermissions.Exceptions;
 using Channel = Domain.Chats.Channel;
 
 namespace Application.Services.ChatServices
@@ -56,7 +58,14 @@ namespace Application.Services.ChatServices
 
         public void DeleteChat(Guid chatId)
         {
-            _chatRepository.Delete(chatId);
+            var user = _userRepository.Find(_context.CurrentUserId);
+            var chat = _chatRepository.Find(chatId);
+
+            if (chat is PrivateChat privateChat && user.IsMemberOf(privateChat) ||
+                chat is IHasOwner chatWithOwner && user.IsOwnerOf(chatWithOwner))
+                _chatRepository.Delete(chatId);
+            
+            throw new NoPermissionToDeleteChatException();
         }
     }
 }

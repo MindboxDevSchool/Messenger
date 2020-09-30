@@ -23,13 +23,9 @@ namespace Domain.Chats
         }
 
         public Guid Id { get; }
-
         public ChatName Name { get; }
-
         public IReadOnlyCollection<IUser> Members { get; }
-
         public IReadOnlyCollection<IMessage> Messages { get; }
-
         public IUser Owner { get; }
         public ChatDescription Description { get; }
 

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Domain.Chats;
 using Domain.Message;
 using Domain.User;
-using Domain.UserPermissions.Exeptions;
 
 namespace Domain.UserPermissions
 {

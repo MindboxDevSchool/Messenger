@@ -8,10 +8,8 @@ namespace Application.Services.UserServices
     {
         private readonly IRepository<IUser> _repository;
 
-        public UserService(IRepository<IUser> repository)
-        {
+        public UserService(IRepository<IUser> repository) => 
             _repository = repository;
-        }
 
         public Guid Register(UserName userName, PhoneNumber phoneNumber)
         {
@@ -21,9 +19,7 @@ namespace Application.Services.UserServices
             return id;
         }
 
-        public IUser GetUser(Guid id)
-        {
-            return _repository.Find(id);
-        }
+        public IUser GetUser(Guid id) =>
+            _repository.Find(id);
     }
 }
