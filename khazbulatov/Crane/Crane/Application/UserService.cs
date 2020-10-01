@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Crane.Domain;
 using Crane.Infrastructure;
 
@@ -9,10 +10,15 @@ namespace Crane.Application
         private readonly IIdentityProvider _idProvider;
         private readonly IRepo<IUser> _userRepo;
 
-        public UserService()
+        public UserService() : this(
+            new SequentialIdentityProvider(),
+            new FileRepo<IUser>(".usr")
+        ) { }
+
+        public UserService(IIdentityProvider idProvider, IRepo<IUser> userRepo)
         {
-            _idProvider = new SequentialIdentityProvider();
-            _userRepo = new FileRepo<IUser>(".usr");
+            _idProvider = idProvider ?? throw new ArgumentNullException(nameof(idProvider));
+            _userRepo = userRepo ?? throw new ArgumentNullException(nameof(userRepo));
         }
 
         public IUser CreateUser(string name, string password)

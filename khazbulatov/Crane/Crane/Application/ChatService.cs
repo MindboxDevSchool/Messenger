@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Crane.Domain;
 using Crane.Infrastructure;
 
@@ -9,10 +10,15 @@ namespace Crane.Application
         private readonly IIdentityProvider _idProvider;
         private readonly IRepo<IChat> _chatRepo;
 
-        public ChatService()
+        public ChatService() : this(
+            new SequentialIdentityProvider(),
+            new FileRepo<IChat>(".cht")
+        ) { }
+
+        public ChatService(IIdentityProvider idProvider, IRepo<IChat> chatRepo)
         {
-            _idProvider = new SequentialIdentityProvider();
-            _chatRepo = new FileRepo<IChat>(".cht");
+            _idProvider = idProvider ?? throw new ArgumentNullException(nameof(idProvider));
+            _chatRepo = chatRepo ?? throw new ArgumentNullException(nameof(chatRepo));
         }
 
         public PrivateChat CreatePrivateChat(IUser self, IUser peer)

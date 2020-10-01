@@ -10,10 +10,15 @@ namespace Crane.Application
         private readonly IIdentityProvider _idProvider;
         private readonly IRepo<ISession> _sessionRepo;
 
-        public SessionService()
+        public SessionService() : this(
+            new SequentialIdentityProvider(),
+            new FileRepo<ISession>(".ssn")
+        ) { }
+
+        public SessionService(IIdentityProvider idProvider, IRepo<ISession> sessionRepo)
         {
-            _idProvider = new SequentialIdentityProvider();
-            _sessionRepo = new FileRepo<ISession>(".ssn");
+            _idProvider = idProvider ?? throw new ArgumentNullException(nameof(idProvider));
+            _sessionRepo = sessionRepo ?? throw new ArgumentNullException(nameof(sessionRepo));
         }
 
         public Maybe<ISession> CreateSession(IUser user, string password)
