@@ -10,6 +10,7 @@ namespace Crane.Domain
         string Name { get; }
         
         bool TrySendMessage(IUser user, string body);
-        bool TryEditMessage(IUser user, IMessage message, string body);
+        bool TryEditMessage(IUser user, int messageId, string body);
+        bool TryDeleteMessage(IUser user, int messageId);
     }
 }

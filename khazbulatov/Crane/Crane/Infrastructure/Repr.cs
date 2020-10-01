@@ -16,7 +16,19 @@ namespace Crane.Infrastructure
                 { typeof(Member), (
                     s => (T)(object) Member.Parse(s),
                     o => Member.Render((Member)(object) o)
-                )}
+                )},
+                { typeof(Chat), (
+                    s => (T)(object) Chat.Parse(s),
+                    o => Chat.Render((Chat)(object) o)
+                )},
+                { typeof(User), (
+                    s => (T)(object) User.Parse(s),
+                    o => User.Render((User)(object) o)
+                )},
+                { typeof(Session), (
+                    s => (T)(object) Session.Parse(s),
+                    o => Session.Render((Session)(object) o)
+                )},
             };
         
         public static Maybe<T> Parse(string representation)

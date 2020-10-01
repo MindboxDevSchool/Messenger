@@ -7,7 +7,7 @@ namespace Crane.Domain
         public DateTime TimeSent { get; }
         public IUser Sender { get; }
         public IChat Chat { get; }
-        public string Body { get; }
+        public string Body { get; set; }
         public int Id { get; }
 
         public static Message Parse(string representation)

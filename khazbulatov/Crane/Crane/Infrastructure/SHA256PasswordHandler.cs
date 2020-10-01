@@ -28,10 +28,24 @@ namespace Crane.Infrastructure
             return joined;
         }
 
-        private static byte[] GetSHA256Hash(byte[] salt, byte[] pass)
+        private static byte[] GetSHA256Hash(byte[] left, byte[] right)
         {
             using SHA256 sha256 = SHA256.Create();
-            return sha256.ComputeHash(JoinBytes(salt, pass));
+            return sha256.ComputeHash(JoinBytes(left, right));
+        }
+
+        public SHA256PasswordHandler(string password)
+        {
+            SetPassword(password);
+        }
+
+        public string GetToken(object o)
+        {
+            if (o == null) throw new ArgumentNullException(nameof(o));
+            
+            byte[] obj = Encoding.UTF8.GetBytes(o.ToString() ?? "");
+
+            return Encoding.UTF8.GetString(GetSHA256Hash(obj, _hash));
         }
 
         public void SetPassword(string password)

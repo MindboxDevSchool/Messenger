@@ -6,20 +6,26 @@ namespace Crane.Application
 {
     public class ChatService
     {
-        private IIdentityProvider _idProvider;
-        private IRepo<IChat> _chatRepo;
-        
+        private readonly IIdentityProvider _idProvider;
+        private readonly IRepo<IChat> _chatRepo;
+
+        public ChatService()
+        {
+            _idProvider = new SequentialIdentityProvider();
+            _chatRepo = new FileRepo<IChat>(".cht");
+        }
+
         public PrivateChat CreatePrivateChat(IUser self, IUser peer)
         {
             int id = _idProvider.NextId;
             PrivateChat chat = new PrivateChat(
                 id,
                 new SequentialIdentityProvider(),
-                new FileRepo<IMessage>($"{id}.msg"), 
+                new FileRepo<IMessage>($".{id}.msg"), 
                 new Member(self, Role.Participant),
                 new Member(peer, Role.Participant)
             );
-            _chatRepo.AddItem(chat);
+            _chatRepo.Add(chat);
             return chat;
         }
         
@@ -29,10 +35,10 @@ namespace Crane.Application
             GroupChat chat = new GroupChat(
                 id,
                 new SequentialIdentityProvider(),
-                new FileRepo<IMessage>($"{id}.msg"),
-                new FileRepo<IMember>($"{id}.mbr")
+                new FileRepo<IMessage>($".{id}.msg"),
+                new FileRepo<IMember>($".{id}.mbr")
             );
-            _chatRepo.AddItem(chat);
+            _chatRepo.Add(chat);
             return chat;
         }
         
@@ -42,10 +48,10 @@ namespace Crane.Application
             ChannelChat chat = new ChannelChat(
                 id,
                 new SequentialIdentityProvider(),
-                new FileRepo<IMessage>($"{id}.msg"),
-                new FileRepo<IMember>($"{id}.mbr")
+                new FileRepo<IMessage>($".{id}.msg"),
+                new FileRepo<IMember>($".{id}.mbr")
             );
-            _chatRepo.AddItem(chat);
+            _chatRepo.Add(chat);
             return chat;
         }
         

@@ -6,9 +6,9 @@ namespace Crane.Infrastructure
 {
     public static class FileIO
     {
-        public static IList<T> Load<T>(string filename)
+        public static List<T> Load<T>(string filename)
         {
-            IList<T> items = new List<T>();
+            List<T> items = new List<T>();
             using StreamReader reader = new StreamReader(filename);
             while (!reader.EndOfStream)
             {

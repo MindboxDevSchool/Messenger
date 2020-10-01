@@ -11,7 +11,12 @@ namespace Crane.Application
         
         public bool TryEditMessage(IUser user, IChat chat, IMessage message, string body)
         {
-            return chat.TryEditMessage(user, message, body);
+            return chat.TryEditMessage(user, message.Id, body);
+        }
+        
+        public bool TryDeleteMessage(IUser user, IChat chat, IMessage message)
+        {
+            return chat.TryDeleteMessage(user, message.Id);
         }
     }
 }
