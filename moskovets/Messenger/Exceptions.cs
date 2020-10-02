@@ -19,7 +19,7 @@ namespace Messenger
     {
     }
     
-    public class AccessErrorException : Exception //invalid
+    public class InvalidAccessException : Exception //invalid
     {
     }
     

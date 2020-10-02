@@ -7,10 +7,10 @@ namespace Messenger.Domain
     {
         String Id { get; }
         string Name { get; set; }
-        IUser Creator { get; }
+        String CreatorId { get; }
         void AddMember(IUser user);
         void RemoveMember(IUser user);
         bool HasMember(IUser user);
-        IReadOnlyCollection<IUser> GetMembers();
+        IReadOnlyCollection<String> GetMembers();
     }
 }

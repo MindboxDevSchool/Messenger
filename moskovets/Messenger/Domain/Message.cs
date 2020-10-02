@@ -7,9 +7,9 @@ namespace Messenger.Domain
         public Message(String id, string text, ISender sender, IReceiver receiver, DateTime sentAt)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
-            Text = text ?? throw new ArgumentNullException(nameof(text));
-            if (text == "")
+            if (String.IsNullOrEmpty(text))
                 throw new InvalidTextException();
+            Text = text;
             Sender = sender ?? throw new ArgumentNullException(nameof(sender));
             Receiver = receiver ?? throw new ArgumentNullException(nameof(receiver));
             SentAt = sentAt;

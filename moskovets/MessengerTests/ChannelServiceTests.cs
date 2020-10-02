@@ -61,7 +61,7 @@ namespace MessengerTests
             var savedMembers = _channelRepository.GetChannel(channel.Id).GetMembers();
 
             Assert.AreEqual(1, savedMembers.Count);
-            Assert.True(savedMembers.First().Equals(member));
+            Assert.True(savedMembers.First() == member.Id);
         }
     }
 }

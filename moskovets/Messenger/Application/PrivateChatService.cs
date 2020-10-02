@@ -25,8 +25,8 @@ namespace Messenger.Application
         public void EditMessage(String messageId, String editorId, string newText)
         {
             if (!CanEditorAccessMessage(messageId, editorId))
-                throw new AccessErrorException();
-            if (newText == "")
+                throw new InvalidAccessException();
+            if (String.IsNullOrEmpty(newText))
                 throw new InvalidTextException();
             _messageRepository.EditMessage(messageId, newText);
         }
@@ -34,7 +34,7 @@ namespace Messenger.Application
         public void DeleteMessage(string messageId, string editorId)
         {
             if (!CanEditorAccessMessage(messageId, editorId))
-                throw new AccessErrorException();
+                throw new InvalidAccessException();
             _messageRepository.DeleteMessage(messageId);
         }
 

@@ -9,7 +9,8 @@ namespace Messenger.Domain
 
         public Group(String id, string name, IUser creator)
         {
-            if (creator == null) throw new ArgumentNullException(nameof(creator));
+            if (creator == null) 
+                throw new ArgumentNullException(nameof(creator));
             Id = id ?? throw new ArgumentNullException(nameof(id));
             Name = name ?? throw new ArgumentNullException(nameof(name));
             CreatorId = creator.Id;
@@ -36,6 +37,8 @@ namespace Messenger.Domain
 
         public void RemoveMember(IUser user)
         {
+            if (CreatorId == user.Id)
+                throw new RemovingCreatorException();
             _roles.Remove(user.Id);
         }
 

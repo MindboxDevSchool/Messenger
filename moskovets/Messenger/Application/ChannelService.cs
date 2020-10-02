@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Messenger.Domain;
 
 namespace Messenger.Application
@@ -29,7 +30,7 @@ namespace Messenger.Application
         {
             var member = _userRepository.GetUser(memberId);
             var channel = _channelRepository.GetChannel(channelId);
-            if (!channel.Creator.Equals(member))
+            if (channel.CreatorId != memberId)
                 channel.AddMember(member);
         }
 
@@ -39,15 +40,14 @@ namespace Messenger.Application
             var channel = _channelRepository.GetChannel(channelId);
             if (!channel.HasMember(member))
                 throw new MemberNotFoundException();
-            if (channel.Creator.Equals(member))
-                return; // throw
             channel.RemoveMember(member);
         }
 
         public IReadOnlyCollection<IUser> GetMembers(string channelId)
         {
             var channel = _channelRepository.GetChannel(channelId);
-            return channel.GetMembers();
+            var users = channel.GetMembers();
+            return users.Select(uId => _userRepository.GetUser(uId)).ToList();
         }
 
         public IMessage SendMessage(string senderId, string channelId, string text)
@@ -62,9 +62,9 @@ namespace Messenger.Application
         public void EditMessage(string messageId, string editorId, string newText)
         {
             if (!CanEditorAccessMessage(messageId, editorId))
-                throw new AccessErrorException();
+                throw new InvalidAccessException();
 
-            if (newText == "")
+            if (String.IsNullOrEmpty(newText))
                 throw new InvalidTextException();
             _messageRepository.EditMessage(messageId, newText);
         }
@@ -72,7 +72,7 @@ namespace Messenger.Application
         public void DeleteMessage(string messageId, string editorId)
         {
             if (!CanEditorAccessMessage(messageId, editorId))
-                throw new AccessErrorException();
+                throw new InvalidAccessException();
             _messageRepository.DeleteMessage(messageId);
         }
 

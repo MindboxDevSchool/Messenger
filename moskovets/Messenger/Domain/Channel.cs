@@ -10,38 +10,40 @@ namespace Messenger.Domain
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Creator = user ?? throw new ArgumentNullException(nameof(user));
-            _members = new List<IUser>();
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            CreatorId = user.Id;
+            _members = new List<String>();
         }
 
         public String Id { get; }
         public string Name { get; set; }
-        public IUser Creator { get; }
-        private List<IUser> _members;
+        public String CreatorId { get; }
+        private List<String> _members;
 
         public bool HasMember(IUser user)
         {
-            return _members.Any(m => m.Equals(user));
+            return _members.Any(m => m == user.Id);
         }
 
-        public IReadOnlyCollection<IUser> GetMembers()
+        public IReadOnlyCollection<String> GetMembers()
         {
             return _members;
         }
 
         public void AddMember(IUser user)
         {
-            if (!_members.Any(u => u.Equals(user)))
+            if (!HasMember(user))
             {
-                _members.Add(user);
+                _members.Add(user.Id);
             }
         }
 
         public void RemoveMember(IUser user)
         {
-            if (Creator.Equals(user))
+            if (CreatorId == user.Id)
                 throw new RemovingCreatorException();
-            _members.RemoveAll(u => u.Equals(user));
+            _members.Remove(user.Id);
         }
     }
 }

@@ -8,7 +8,7 @@ using NUnit.Framework.Constraints;
 
 namespace MessengerTests
 {
-    public class ChatServiceTests
+    public class PrivateChatServiceTests
     {
         private UserService _userService;
         private UserRepository _userRepository;
@@ -105,7 +105,7 @@ namespace MessengerTests
             var message = _privateChatService.SendMessage(sender.Id, receiver.Id, text);
             var newText = "asda";
 
-            Assert.Throws<AccessErrorException>(() =>
+            Assert.Throws<InvalidAccessException>(() =>
                 _privateChatService.EditMessage(message.Id, receiver.Id, newText));
         }
 
@@ -149,7 +149,7 @@ namespace MessengerTests
             var text = "message text";
             var message = _privateChatService.SendMessage(sender.Id, receiver.Id, text);
 
-            Assert.Throws<AccessErrorException>(() => _privateChatService.DeleteMessage(message.Id, receiver.Id));
+            Assert.Throws<InvalidAccessException>(() => _privateChatService.DeleteMessage(message.Id, receiver.Id));
         }
 
         [Test]

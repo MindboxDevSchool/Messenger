@@ -40,7 +40,7 @@ namespace Messenger.Application
             if (!group.HasMember(member))
                 throw new MemberNotFoundException();
             if (group.CreatorId == member.Id)
-                return; // throw
+                throw new RemovingCreatorException();
             group.RemoveMember(member);
         }
 
@@ -51,7 +51,7 @@ namespace Messenger.Application
             if (!group.HasMember(member))
                 throw new MemberNotFoundException();
             if (group.CreatorId == member.Id)
-                return; // throw
+                throw new InvalidAccessException(); 
             group.SetRole(member, role);
         }
 
@@ -76,7 +76,7 @@ namespace Messenger.Application
         public void EditMessage(string messageId, string editorId, string newText)
         {
             if (!CanEditorAccessMessage(messageId, editorId))
-                throw new AccessErrorException();
+                throw new InvalidAccessException();
 
             if (String.IsNullOrEmpty(newText))
                 throw new InvalidTextException();
@@ -86,7 +86,7 @@ namespace Messenger.Application
         public void DeleteMessage(string messageId, string editorId)
         {
             if (!CanEditorAccessMessage(messageId, editorId))
-                throw new AccessErrorException();
+                throw new InvalidAccessException();
             _messageRepository.DeleteMessage(messageId);
         }
 

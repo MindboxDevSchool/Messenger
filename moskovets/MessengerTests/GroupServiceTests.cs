@@ -49,5 +49,17 @@ namespace MessengerTests
                 newText,
                 _messageRepository.GetMessages(group).First(m => m.Id == message.Id).Text);
         }
+
+        [Test]
+        public void EditMessage_ThrowAccessException_IfEditorHaveNoAccess()
+        {
+            var group = _groupService.CreateGroup(_users[0].Id, "name");
+            _groupService.AddMember(_users[1].Id, group.Id);
+            _groupService.AddMember(_users[2].Id, group.Id);
+            var message = _groupService.SendMessage(_users[1].Id, group.Id, "message");
+            var newText = "new message";
+            
+            Assert.Throws<InvalidAccessException>(() => _groupService.EditMessage(message.Id, _users[2].Id, newText));
+        }
     }
 }
