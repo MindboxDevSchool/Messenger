@@ -11,11 +11,11 @@ namespace Crane.Domain
         public override string Name => _peer.User.Name;
 
         public PrivateChat(int id, IIdentityProvider idProvider,
-            IRepo<IMessage> messageRepo, IMember self, IMember peer)
+            IRepo<IMessage> messageRepo, IUser self, IUser peer)
             : base(id, idProvider, messageRepo)
         {
-            _peer = peer;
-            Members = new IMember[] {self, _peer};
+            _peer = new Member(peer, Role.Participant);
+            Members = new IMember[] {new Member(self, Role.Participant), _peer};
             Roles = new IRole[] 
             {
                 Role.Nobody,

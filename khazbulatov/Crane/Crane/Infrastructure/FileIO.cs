@@ -8,6 +8,8 @@ namespace Crane.Infrastructure
     {
         public static List<T> Load<T>(string filename)
         {
+            if (!File.Exists(filename)) Dump<T>(filename, new T[0]);
+            
             List<T> items = new List<T>();
             using StreamReader reader = new StreamReader(filename);
             while (!reader.EndOfStream)

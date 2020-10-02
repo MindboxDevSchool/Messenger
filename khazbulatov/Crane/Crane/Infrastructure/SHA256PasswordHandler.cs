@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Crane.Domain;
@@ -45,7 +46,7 @@ namespace Crane.Infrastructure
             
             byte[] obj = Encoding.UTF8.GetBytes(o.ToString() ?? "");
 
-            return Encoding.UTF8.GetString(GetSHA256Hash(obj, _hash));
+            return Convert.ToBase64String(GetSHA256Hash(obj, _hash));
         }
 
         public void SetPassword(string password)
@@ -53,10 +54,8 @@ namespace Crane.Infrastructure
             if (password == null) throw new ArgumentNullException(nameof(password));
             
             byte[] pass = Encoding.UTF8.GetBytes(password);
-            byte[] salt = GetSalt(SaltLength);
-            byte[] hash = GetSHA256Hash(salt, pass);
-
-            _salt = salt;
+            _salt = GetSalt(SaltLength);
+            byte[] hash = GetSHA256Hash(_salt, pass);
             _hash = hash;
         }
 
@@ -67,7 +66,7 @@ namespace Crane.Infrastructure
             if (_salt == null || _hash == null) return false;
             byte[] pass = Encoding.UTF8.GetBytes(password);
 
-            return _hash == GetSHA256Hash(_salt, pass);
+            return GetSHA256Hash(_salt, pass).SequenceEqual(_hash);
         }
     }
 }

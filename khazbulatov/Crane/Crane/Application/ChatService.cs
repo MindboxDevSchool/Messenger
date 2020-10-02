@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Crane.Domain;
 using Crane.Infrastructure;
@@ -28,14 +29,14 @@ namespace Crane.Application
                 id,
                 new SequentialIdentityProvider(),
                 new FileRepo<IMessage>($".{id}.msg"), 
-                new Member(self, Role.Participant),
-                new Member(peer, Role.Participant)
+                self,
+                peer
             );
             _chatRepo.Add(chat);
             return chat;
         }
         
-        public GroupChat CreateGroupChat()
+        public GroupChat CreateGroupChat(IUser self, IEnumerable<IUser> peers)
         {
             int id = _idProvider.NextId;
             GroupChat chat = new GroupChat(
@@ -45,10 +46,11 @@ namespace Crane.Application
                 new FileRepo<IMember>($".{id}.mbr")
             );
             _chatRepo.Add(chat);
+            // TODO: Add members
             return chat;
         }
         
-        public ChannelChat CreateChannelChat()
+        public ChannelChat CreateChannelChat(IUser self)
         {
             int id = _idProvider.NextId;
             ChannelChat chat = new ChannelChat(
@@ -58,6 +60,7 @@ namespace Crane.Application
                 new FileRepo<IMember>($".{id}.mbr")
             );
             _chatRepo.Add(chat);
+            // TODO: Add members
             return chat;
         }
         
