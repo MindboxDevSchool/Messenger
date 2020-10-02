@@ -15,11 +15,11 @@ namespace Messenger
     {
         
     }
-    public class EmptyTextException : Exception
+    public class EmptyTextException : Exception // invalid
     {
     }
     
-    public class AccessErrorException : Exception
+    public class AccessErrorException : Exception //invalid
     {
     }
     

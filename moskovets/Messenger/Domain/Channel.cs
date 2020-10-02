@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Messenger.Domain
 {
-    public class Chanel : IChanel
+    public class Channel : IChannel
     {
-        public Chanel(String id, string name, IUser user)
+        public Channel(String id, string name, IUser user)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
             Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -23,6 +23,7 @@ namespace Messenger.Domain
         {
             return _members;
         }
+
         public void AddMember(IUser user)
         {
             if (!_members.Any(u => u.Equals(user)))
@@ -30,6 +31,7 @@ namespace Messenger.Domain
                 _members.Add(user);
             }
         }
+
         public void RemoveMember(IUser user)
         {
             if (Creator.Equals(user))

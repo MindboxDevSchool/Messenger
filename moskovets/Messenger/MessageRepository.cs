@@ -32,17 +32,17 @@ namespace Messenger
 
         public void DeleteMessage(String id)
         {
-            _messages.RemoveAll(m => m.Id == id); 
+            _messages.RemoveAll(m => m.Id == id);
         }
 
         public IReadOnlyCollection<IMessage> GetMessages(ISender sender, IReceiver receiver)
         {
             var messages = _messages
-                .Where(m => 
-                    m.Sender.Equals(sender) && m.Receiver.Equals(receiver) || 
+                .Where(m =>
+                    m.Sender.Equals(sender) && m.Receiver.Equals(receiver) ||
                     m.Sender.Equals(receiver) && m.Receiver.Equals(sender))
                 .OrderByDescending(m => m.SentAt).ToList();
-            
+
             return messages;
         }
 
@@ -51,7 +51,7 @@ namespace Messenger
             var messages = _messages
                 .Where(m => m.Receiver.Equals(receiver))
                 .OrderByDescending(m => m.SentAt).ToList();
-            
+
             return messages;
         }
 

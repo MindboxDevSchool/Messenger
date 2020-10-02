@@ -4,12 +4,12 @@ using Messenger.Domain;
 
 namespace Messenger.Application
 {
-    public class ChatService : IChatService
+    public class PrivateChatService : IChatService
     {
         private IUserRepository _userRepository;
         private IMessageRepository _messageRepository;
 
-        public ChatService(IUserRepository userRepository, IMessageRepository messageRepository)
+        public PrivateChatService(IUserRepository userRepository, IMessageRepository messageRepository)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _messageRepository = messageRepository ?? throw new ArgumentNullException(nameof(messageRepository));
@@ -37,7 +37,7 @@ namespace Messenger.Application
                 throw new AccessErrorException();
             _messageRepository.DeleteMessage(messageId);
         }
-        
+
         public IReadOnlyCollection<IMessage> GetAllMessages(string senderId, string receiverId)
         {
             var sender = _userRepository.GetUser(senderId);

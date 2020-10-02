@@ -8,25 +8,25 @@ using NUnit.Framework.Constraints;
 
 namespace MessengerTests
 {
-    public class ChanelServiceTests
+    public class ChannelServiceTests
     {
         private UserService _userService;
-        private ChanelService _chanelService;
+        private ChannelService _channelService;
         private UserRepository _userRepository;
-        private ChanelRepository _chanelRepository;
+        private ChannelRepository _channelRepository;
         private MessageRepository _messageRepository;
         private List<IUser> _users;
-        
-        
+
+
         [SetUp]
         public void Setup()
         {
             _userRepository = new UserRepository();
             _userService = new UserService(_userRepository);
             _messageRepository = new MessageRepository();
-            _chanelRepository = new ChanelRepository();
-            _chanelService = new ChanelService(_userRepository, _messageRepository, _chanelRepository);
-            
+            _channelRepository = new ChannelRepository();
+            _channelService = new ChannelService(_userRepository, _messageRepository, _channelRepository);
+
             _users = new List<IUser>()
             {
                 _userRepository.CreateUser("1"),
@@ -34,18 +34,18 @@ namespace MessengerTests
                 _userRepository.CreateUser("3"),
             };
         }
-        
+
         [Test]
-        public void CreateChanel_SuccessSaved_IfValidUser()
+        public void CreateChannel_SuccessSaved_IfValidUser()
         {
             var name = "name";
             var creator = _users[0];
 
-            var chanel = _chanelService.CreateChanel(creator.Id, name);
+            var channel = _channelService.CreateChannel(creator.Id, name);
 
-            Assert.AreEqual(name, chanel.Name);
-            var savedChanel = _chanelRepository.GetChanel(chanel.Id);
-            Assert.True(savedChanel.Equals(chanel));
+            Assert.AreEqual(name, channel.Name);
+            var savedChannel = _channelRepository.GetChannel(channel.Id);
+            Assert.True(savedChannel.Equals(channel));
         }
 
         [Test]
@@ -53,16 +53,15 @@ namespace MessengerTests
         {
             var name = "name";
             var creator = _users[0];
-            var chanel = _chanelService.CreateChanel(creator.Id, name);
+            var channel = _channelService.CreateChannel(creator.Id, name);
             var member = _users[1];
-            
-            _chanelService.AddMember(member.Id, chanel.Id);
 
-            var savedMembers = _chanelRepository.GetChanel(chanel.Id).GetMembers();
+            _channelService.AddMember(member.Id, channel.Id);
+
+            var savedMembers = _channelRepository.GetChannel(channel.Id).GetMembers();
 
             Assert.AreEqual(1, savedMembers.Count);
             Assert.True(savedMembers.First().Equals(member));
         }
-
     }
 }

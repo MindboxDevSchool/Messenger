@@ -14,6 +14,7 @@ namespace Messenger.Domain
             Receiver = receiver ?? throw new ArgumentNullException(nameof(receiver));
             SentAt = sentAt;
         }
+
         public String Id { get; }
         public string Text { get; set; }
         public ISender Sender { get; }

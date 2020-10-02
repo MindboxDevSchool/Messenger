@@ -1,8 +1,7 @@
-﻿using Id = System.String;
+﻿using System;
 
 namespace Messenger
 {
-
     public enum Role
     {
         Default,
@@ -13,17 +12,21 @@ namespace Messenger
 
     public interface IEntityWithId
     {
-        public Id Id { get; }
-        public bool Equals(IEntityWithId other)
+        public String Id { get; }
+    }
+
+    public static class EntityWithIdExtensions
+    {
+        public static bool Equals(this IEntityWithId first, IEntityWithId second)
         {
-            return Id == other.Id;
+            return first.Id == second.Id;
         }
     }
 
     public interface IReceiver : IEntityWithId
     {
     }
-    
+
 
     public interface ISender : IEntityWithId
     {
@@ -38,10 +41,9 @@ namespace Messenger
 
     // user registration, change login
 
-    // create chanel, send to chanel, edit, delete
+    // create channel, send to channel, edit, delete
 
     // chat send, edit, delete message
 
     // Repositories
-
 }
