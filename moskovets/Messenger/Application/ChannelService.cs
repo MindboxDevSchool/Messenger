@@ -30,16 +30,18 @@ namespace Messenger.Application
             var member = _userRepository.GetUser(memberId);
             var channel = _channelRepository.GetChannel(channelId);
             if (!channel.Creator.Equals(member))
-                _channelRepository.AddMember(channelId, member);
+                channel.AddMember(member);
         }
 
         public void RemoveMember(string memberId, string channelId)
         {
             var member = _userRepository.GetUser(memberId);
-            if (!_channelRepository
-                .HasMember(channelId, member))
+            var channel = _channelRepository.GetChannel(channelId);
+            if (!channel.HasMember(member))
                 throw new MemberNotFoundException();
-            _channelRepository.RemoveMember(channelId, member);
+            if (channel.Creator.Equals(member))
+                return; // throw
+            channel.RemoveMember(member);
         }
 
         public IReadOnlyCollection<IUser> GetMembers(string channelId)
@@ -52,8 +54,7 @@ namespace Messenger.Application
         {
             var sender = _userRepository.GetUser(senderId);
             var channel = _channelRepository.GetChannel(channelId);
-            if (!_channelRepository
-                .HasMember(channelId, sender))
+            if (!channel.HasMember(sender))
                 throw new MemberNotFoundException();
             return _messageRepository.CreateMessage(text, sender, channel);
         }
@@ -64,7 +65,7 @@ namespace Messenger.Application
                 throw new AccessErrorException();
 
             if (newText == "")
-                throw new EmptyTextException();
+                throw new InvalidTextException();
             _messageRepository.EditMessage(messageId, newText);
         }
 
@@ -79,8 +80,7 @@ namespace Messenger.Application
         {
             var member = _userRepository.GetUser(memberId);
             var channel = _channelRepository.GetChannel(channelId);
-            if (!_channelRepository
-                .HasMember(channelId, member))
+            if (!channel.HasMember(member))
                 throw new MemberNotFoundException();
 
             return _messageRepository.GetMessages(channel);

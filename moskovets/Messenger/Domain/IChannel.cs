@@ -10,6 +10,7 @@ namespace Messenger.Domain
         IUser Creator { get; }
         void AddMember(IUser user);
         void RemoveMember(IUser user);
+        bool HasMember(IUser user);
         IReadOnlyCollection<IUser> GetMembers();
     }
 }

@@ -15,7 +15,7 @@ namespace Messenger
     {
         
     }
-    public class EmptyTextException : Exception // invalid
+    public class InvalidTextException : Exception // invalid
     {
     }
     

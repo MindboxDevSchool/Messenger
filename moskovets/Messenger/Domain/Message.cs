@@ -9,7 +9,7 @@ namespace Messenger.Domain
             Id = id ?? throw new ArgumentNullException(nameof(id));
             Text = text ?? throw new ArgumentNullException(nameof(text));
             if (text == "")
-                throw new EmptyTextException();
+                throw new InvalidTextException();
             Sender = sender ?? throw new ArgumentNullException(nameof(sender));
             Receiver = receiver ?? throw new ArgumentNullException(nameof(receiver));
             SentAt = sentAt;

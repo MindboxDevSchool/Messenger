@@ -65,7 +65,7 @@ namespace MessengerTests
             var user2Id = _users[1].Id;
             var text = "";
 
-            Assert.Throws<EmptyTextException>(() => _privateChatService.SendMessage(user1Id, user2Id, text));
+            Assert.Throws<InvalidTextException>(() => _privateChatService.SendMessage(user1Id, user2Id, text));
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace MessengerTests
             var message = _privateChatService.SendMessage(sender.Id, receiver.Id, text);
             var newText = "";
 
-            Assert.Throws<EmptyTextException>(() => _privateChatService.EditMessage(message.Id, sender.Id, newText));
+            Assert.Throws<InvalidTextException>(() => _privateChatService.EditMessage(message.Id, sender.Id, newText));
         }
 
         [Test]

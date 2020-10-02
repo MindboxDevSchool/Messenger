@@ -5,33 +5,53 @@ namespace Messenger.Domain
 {
     public class Group : IGroup
     {
+        private Dictionary<String, Role> _roles;
+
         public Group(String id, string name, IUser creator)
         {
             if (creator == null) throw new ArgumentNullException(nameof(creator));
             Id = id ?? throw new ArgumentNullException(nameof(id));
             Name = name ?? throw new ArgumentNullException(nameof(name));
-
-            Roles = new Dictionary<IUser, Role>();
-            Roles.Add(creator, Role.Admin);
+            CreatorId = creator.Id;
+            _roles = new Dictionary<String, Role>();
+            _roles.Add(creator.Id, Role.Admin);
         }
 
         public String Id { get; }
         public string Name { get; set; }
-        public Dictionary<IUser, Role> Roles { get; }
+        public String CreatorId { get; }
 
-        public bool SetRole(IUser user, Role role)
+        public void SetRole(IUser user, Role role)
         {
-            throw new NotImplementedException();
+            if (_roles.ContainsKey(user.Id))
+                _roles.Remove(user.Id);
+            _roles.Add(user.Id, role);
         }
 
-        public bool AddUser(IUser user)
+        public void AddMember(IUser user)
         {
-            throw new NotImplementedException();
+            if (!_roles.ContainsKey(user.Id))
+                _roles.Add(user.Id, Role.Default);
         }
 
-        public bool RemoveUser(IUser user)
+        public void RemoveMember(IUser user)
         {
-            throw new NotImplementedException();
+            _roles.Remove(user.Id);
+        }
+
+        public bool HasMember(IUser user)
+        {
+            return _roles.ContainsKey(user.Id);
+        }
+
+        public Role GetRole(IUser user)
+        {
+            return _roles.GetValueOrDefault(user.Id);
+        }
+
+        public IReadOnlyCollection<string> GetMembers()
+        {
+            return _roles.Keys;
         }
     }
 }

@@ -19,6 +19,11 @@ namespace Messenger.Domain
         public IUser Creator { get; }
         private List<IUser> _members;
 
+        public bool HasMember(IUser user)
+        {
+            return _members.Any(m => m.Equals(user));
+        }
+
         public IReadOnlyCollection<IUser> GetMembers()
         {
             return _members;

@@ -7,10 +7,13 @@ namespace Messenger.Domain
     {
         String Id { get; }
         string Name { get; set; }
-        Dictionary<IUser, Role> Roles { get; }
+        String CreatorId { get; }
 
-        bool SetRole(IUser user, Role role);
-        bool AddUser(IUser user);
-        bool RemoveUser(IUser user);
+        void SetRole(IUser user, Role role);
+        void AddMember(IUser user);
+        void RemoveMember(IUser user);
+        bool HasMember(IUser user);
+        Role GetRole(IUser user);
+        IReadOnlyCollection<String> GetMembers();
     }
 }

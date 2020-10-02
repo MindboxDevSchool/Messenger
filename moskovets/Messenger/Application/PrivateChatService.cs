@@ -27,7 +27,7 @@ namespace Messenger.Application
             if (!CanEditorAccessMessage(messageId, editorId))
                 throw new AccessErrorException();
             if (newText == "")
-                throw new EmptyTextException();
+                throw new InvalidTextException();
             _messageRepository.EditMessage(messageId, newText);
         }
 

@@ -8,8 +8,6 @@ namespace Messenger
         Admin
     }
 
-    // Receivers
-
     public interface IEntityWithId
     {
         public String Id { get; }

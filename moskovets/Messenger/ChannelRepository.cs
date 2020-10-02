@@ -35,27 +35,9 @@ namespace Messenger
             throw new System.NotImplementedException();
         }
 
-        public void AddMember(string channelId, IUser member)
-        {
-            var channel = GetChannel(channelId);
-            channel.AddMember(member);
-        }
-
-        public void RemoveMember(string channelId, IUser member)
-        {
-            var channel = GetChannel(channelId);
-            channel.RemoveMember(member);
-        }
-
         public void DeleteChannel(string channelId)
         {
             _channels.RemoveAll(c => c.Id == channelId);
-        }
-
-        public bool HasMember(string channelId, IUser member)
-        {
-            var channel = GetChannel(channelId);
-            return channel.GetMembers().Any(m => m.Equals(member));
         }
     }
 }
