@@ -1,0 +1,82 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{390AE9A6-0C33-4769-A993-D1A1A0EB3B24}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>MessegerLocal</RootNamespace>
+        <AssemblyName>MessegerLocal</AssemblyName>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="App\ChatService.cs" />
+        <Compile Include="App\IChatService.cs" />
+        <Compile Include="App\IUserService.cs" />
+        <Compile Include="App\UserService.cs" />
+        <Compile Include="Domain\Chat\Channel.cs" />
+        <Compile Include="Domain\Chat\IChat.cs" />
+        <Compile Include="Domain\Chat\IChatRepository.cs" />
+        <Compile Include="Domain\Chat\IChattedUser.cs" />
+        <Compile Include="Domain\Chat\Conversation.cs" />
+        <Compile Include="Domain\Chat\IMultipleUsersChat.cs" />
+        <Compile Include="Domain\Chat\ISinglePersonChat.cs" />
+        <Compile Include="Domain\Message\Message.cs" />
+        <Compile Include="Domain\Message\IMessageRepository.cs" />
+        <Compile Include="Domain\Role\BlockedUser.cs" />
+        <Compile Include="Domain\Role\ChannelAuthor.cs" />
+        <Compile Include="Domain\Role\ChannelMember.cs" />
+        <Compile Include="Domain\Role\ConversationAdmin.cs" />
+        <Compile Include="Domain\Role\ConversationMember.cs" />
+        <Compile Include="Domain\Role\Right.cs" />
+        <Compile Include="Domain\Role\Role.cs" />
+        <Compile Include="Domain\Role\SingleChatMember.cs" />
+        <Compile Include="Domain\User\Credentials.cs" />
+        <Compile Include="Domain\User\IUser.cs" />
+        <Compile Include="Domain\User\IUserRepository.cs" />
+        <Compile Include="Domain\User\ProfilePicture.cs" />
+        <Compile Include="Domain\User\User.cs" />
+        <Compile Include="Domain\User\UserInChat.cs" />
+        <Compile Include="Infrastructure\ChatRepository.cs" />
+        <Compile Include="Infrastructure\MessageRepository.cs" />
+        <Compile Include="Infrastructure\UserRepository.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
